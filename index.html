@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RetinaScan — Student Learning Platform</title>
-<meta name="description" content="Practice reading real retinal fundus images with AI-powered feedback. Built for optometry students. Train diagnostic pattern recognition from classroom to clinic.">
+<title>RetinaScan — Practice Reading Real Fundus Images | Optometry Student Training</title>
+<meta name="description" content="Free retina scan practice for optometry students. Read real fundus images, get AI feedback on your diagnosis, and track your progress across 50+ cases and 10 conditions. No signup required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -252,6 +252,10 @@ section { padding: 100px 0; }
   padding: 0 24px;
 }
 
+@media (min-width: 1024px) {
+  .hero-content { max-width: 900px; position: relative; }
+}
+
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
@@ -301,8 +305,17 @@ section { padding: 100px 0; }
   font-weight: 300;
   color: var(--text-body);
   max-width: 600px;
-  margin: 0 auto 36px;
+  margin: 0 auto 20px;
   line-height: 1.6;
+}
+
+.hero-pain {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.5;
 }
 
 .hero-buttons {
@@ -311,7 +324,15 @@ section { padding: 100px 0; }
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.hero-microcopy {
+  font-size: 13px;
+  color: var(--text-fine);
+  text-align: center;
   margin-bottom: 32px;
+  letter-spacing: 0.01em;
 }
 
 .btn-hero-primary {
@@ -1059,12 +1080,458 @@ section { padding: 100px 0; }
 /* ───── SCROLL REVEAL ───── */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0);
+}
+/* Stagger children */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal-stagger].revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+[data-reveal-stagger].revealed > *:nth-child(2) { transition-delay: 0.1s; }
+[data-reveal-stagger].revealed > *:nth-child(3) { transition-delay: 0.2s; }
+[data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 0.3s; }
+[data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 0.4s; }
+
+/* ───── MOUSE GLOW ───── */
+.hero-mouse-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,212,191,0.07) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease-out, top 0.3s ease-out;
+  will-change: left, top;
+}
+
+/* ───── HERO TEXT ANIMATION ───── */
+.hero-line { display: block; overflow: hidden; }
+.hero-line-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(100%);
+}
+.hero-line-inner.animate-in {
+  animation: slideUpFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes slideUpFadeIn {
+  0% { opacity: 0; transform: translateY(100%); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.hero-line-inner.delay-1 { animation-delay: 0.15s; }
+.hero-line-inner.delay-2 { animation-delay: 0.3s; }
+.gradient-text-glow {
+  text-shadow: 0 0 40px rgba(45,212,191,0.3), 0 0 80px rgba(45,212,191,0.15);
+}
+
+/* ───── CTA PULSE ───── */
+.btn-hero-primary {
+  position: relative;
+  overflow: visible;
+  transition: filter 0.2s, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-hero-primary::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--teal-cta-from), var(--teal-cta-to));
+  opacity: 0;
+  z-index: -1;
+  filter: blur(16px);
+  animation: ctaPulse 3.5s ease-in-out infinite;
+}
+@keyframes ctaPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+}
+.btn-hero-primary:hover { transform: scale(1.03); }
+
+/* ───── FLOATING RETINA UI ───── */
+.hero-retina-float {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 280px;
+  height: 280px;
+  z-index: 3;
+  animation: floatUpDown 4s ease-in-out infinite;
+  pointer-events: auto;
+}
+@keyframes floatUpDown {
+  0%, 100% { transform: translateY(-50%); }
+  50% { transform: translateY(calc(-50% - 12px)); }
+}
+.retina-eye {
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #c97a3a 0%, #8B4513 25%, #5a2d0c 50%, #3d1a06 70%, #1a0a02 100%);
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 0 40px rgba(45,212,191,0.15), 0 0 80px rgba(45,212,191,0.08), inset 0 0 30px rgba(0,0,0,0.4);
+  overflow: visible;
+}
+.retina-optic-disc {
+  position: absolute;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5d5a0 0%, #d4a76a 60%, #b8864a 100%);
+  top: 45%; left: 58%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px rgba(245,213,160,0.3);
+}
+.retina-vessel {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+}
+.retina-vessel::after {
+  content: '';
+  position: absolute;
+  height: 1.5px;
+  background: linear-gradient(90deg, rgba(139,30,30,0.8), rgba(139,30,30,0.2));
+  border-radius: 1px;
+}
+.retina-vessel.v1 { transform: rotate(-25deg); }
+.retina-vessel.v1::after { width: 60px; }
+.retina-vessel.v2 { transform: rotate(15deg); }
+.retina-vessel.v2::after { width: 50px; }
+.retina-vessel.v3 { transform: rotate(45deg); }
+.retina-vessel.v3::after { width: 45px; }
+.retina-vessel.v4 { transform: rotate(-60deg); }
+.retina-vessel.v4::after { width: 55px; }
+
+.retina-dot {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--teal);
+  background: transparent;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+.retina-dot.d1 { top: 30%; left: 35%; animation-delay: 0s; }
+.retina-dot.d2 { top: 55%; left: 25%; animation-delay: 0.6s; }
+.retina-dot.d3 { top: 40%; left: 70%; animation-delay: 1.2s; }
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 4px rgba(45,212,191,0.3); }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 10px rgba(45,212,191,0.6); }
+}
+
+.retina-tooltip {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(45,212,191,0.3);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+.hero-retina-float:hover .retina-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(4px);
+}
+.retina-scan-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.5), transparent);
+  animation: scanLine 3s ease-in-out infinite;
+  border-radius: 1px;
+}
+@keyframes scanLine {
+  0% { top: 10%; opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { top: 90%; opacity: 0; }
+}
+
+/* ───── SOCIAL PROOF ───── */
+.social-proof {
+  text-align: center;
+  padding: 40px 24px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.social-proof.revealed { opacity: 1; transform: translateY(0); }
+.social-proof-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-fine);
+  margin-bottom: 16px;
+}
+.social-proof-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.social-proof-logo {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(100,116,139,0.7);
+  letter-spacing: -0.01em;
+  transition: color 0.3s;
+}
+.social-proof-logo:hover { color: rgba(100,116,139,1); }
+.social-proof-sep {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--text-fine);
+  opacity: 0.4;
+}
+
+/* ───── CARD TILT ───── */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 800px;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+.tilt-card:hover::after { opacity: 1; }
+.tilt-card:hover { transform: scale(1.02); }
+
+/* ───── HOW IT WORKS VISUALS ───── */
+.step-icon-visual {
+  width: 48px; height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.step-icon-visual.c1 { background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.2); }
+.step-icon-visual.c2 { background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.2); }
+.step-icon-visual.c3 { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.2); }
+.step-icon-visual.c4 { background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.2); }
+
+.steps-wrapper {
+  position: relative;
+}
+.steps-connector {
+  display: none;
+}
+@media (min-width: 769px) {
+  .steps-connector {
+    display: block;
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    z-index: 0;
+  }
+  .steps-connector-line {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(45,212,191,0.15), rgba(96,165,250,0.15), rgba(167,139,250,0.15), rgba(52,211,153,0.15));
+  }
+  .steps-connector-node {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid;
+    background: var(--bg-page);
+  }
+  .steps-connector-node.n1 { top: 12%; border-color: var(--step-1); box-shadow: 0 0 8px rgba(45,212,191,0.4); }
+  .steps-connector-node.n2 { top: 37%; border-color: var(--step-2); box-shadow: 0 0 8px rgba(96,165,250,0.4); }
+  .steps-connector-node.n3 { top: 62%; border-color: var(--step-3); box-shadow: 0 0 8px rgba(167,139,250,0.4); }
+  .steps-connector-node.n4 { top: 87%; border-color: var(--step-4); box-shadow: 0 0 8px rgba(52,211,153,0.4); }
+  .steps-grid { position: relative; z-index: 1; }
+}
+
+/* ───── DASHBOARD ENHANCEMENTS ───── */
+.dash-pulse-dot {
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: blink 1.5s infinite;
+}
+.dash-pulse-dot.amber { background: var(--warning); }
+.dash-pulse-dot.emerald { background: var(--success); }
+
+.dash-stat-card {
+  position: relative;
+}
+.dash-stat-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(45,212,191,0.3);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: var(--teal);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+.dash-stat-card:hover .dash-stat-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+.dash-blink-indicator {
+  display: inline-block;
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: subtleBlink 2s ease-in-out infinite;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+@keyframes subtleBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ───── WHY THIS MATTERS ───── */
+.why-section { padding: 100px 0; }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+.why-column {
+  padding: 32px;
+  border: 1px solid var(--border-default);
+  border-radius: 0;
+}
+.why-column:first-child { border-radius: 16px 0 0 16px; }
+.why-column:last-child { border-radius: 0 16px 16px 0; }
+.why-column.traditional { background: rgba(248,113,113,0.03); border-color: rgba(248,113,113,0.15); }
+.why-column.retinascan { background: rgba(45,212,191,0.05); border-color: rgba(45,212,191,0.2); }
+.why-column.outcome { background: rgba(96,165,250,0.03); border-color: rgba(96,165,250,0.15); }
+.why-column-icon { font-size: 24px; margin-bottom: 12px; }
+.why-column-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+.why-column.traditional .why-column-title { color: var(--danger); }
+.why-column.retinascan .why-column-title { color: var(--teal); }
+.why-column.outcome .why-column-title { color: var(--blue); }
+.why-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+.why-item-icon { flex-shrink: 0; font-size: 14px; margin-top: 2px; }
+
+/* ───── FINAL CTA ENHANCEMENTS ───── */
+.final-cta { overflow: hidden; }
+.final-cta-glow {
+  animation: finalCtaGlow 5s ease-in-out infinite;
+}
+@keyframes finalCtaGlow {
+  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+}
+.final-cta-urgency {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--warning);
+  margin-bottom: 8px;
+  position: relative;
+}
+.final-cta-trust {
+  font-size: 13px;
+  color: var(--text-muted);
+  position: relative;
+  margin-bottom: 20px;
+}
+.btn-final-primary {
+  position: relative;
+  transition: filter 0.2s, transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-final-primary:hover { transform: scale(1.03); }
+
+/* ───── SECTION DIVIDERS ───── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.15), transparent);
+  margin: 0;
+}
+
+/* ───── NOISE OVERLAY ───── */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* ───── RIPPLE EFFECT ───── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transform: scale(0);
+  animation: rippleEffect 0.6s ease-out;
+  pointer-events: none;
+}
+@keyframes rippleEffect {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ───── HOVER DELAYS ───── */
+.mode-card, .tech-card, .condition-card, .step-card, .case-card, .team-card {
+  transition-delay: 0.05s;
 }
 
 /* ───── MOBILE ───── */
@@ -1098,6 +1565,11 @@ section { padding: 100px 0; }
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .case-cards-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 24px; }
+  .hero-retina-float { display: none; }
+  .why-grid { grid-template-columns: 1fr; }
+  .why-column { border-radius: 0 !important; }
+  .why-column:first-child { border-radius: 16px 16px 0 0 !important; }
+  .why-column:last-child { border-radius: 0 0 16px 16px !important; }
 
   .dashboard-mockup { overflow-x: auto; }
 
@@ -1108,6 +1580,7 @@ section { padding: 100px 0; }
 </style>
 </head>
 <body>
+<div class="noise-overlay" aria-hidden="true"></div>
 
 <!-- ═══════ 1. NAVIGATION ═══════ -->
 <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -1143,7 +1616,7 @@ section { padding: 100px 0; }
       </ul>
       <div class="nav-actions">
         <a href="#login" class="btn-ghost">Log In</a>
-        <a href="#prototype" class="btn-cta">Start Learning <span class="arrow">&rarr;</span></a>
+        <a href="#prototype" class="btn-cta">Test Yourself <span class="arrow">&rarr;</span></a>
       </div>
     </div>
 
@@ -1158,6 +1631,7 @@ section { padding: 100px 0; }
 <section class="hero" id="hero">
   <canvas class="hero-canvas" id="heroCanvas"></canvas>
   <div class="hero-glow"></div>
+  <div class="hero-mouse-glow" id="heroMouseGlow"></div>
   <div class="hero-rings">
     <div class="ring"></div>
     <div class="ring"></div>
@@ -1168,32 +1642,53 @@ section { padding: 100px 0; }
   <div class="hero-content">
     <div class="hero-eyebrow" data-reveal>
       <span class="eyebrow-dot"></span>
-      BUILT FOR OPTOMETRY STUDENTS
+      FREE RETINA SCAN PRACTICE FOR STUDENTS
     </div>
-    <h1 data-reveal>From Classroom<br><span class="gradient-text">to Clinic.</span></h1>
-    <p class="hero-sub" data-reveal>Practice reading real retinal fundus images. Get AI-powered feedback on your diagnoses. Build the visual pattern recognition that defines a great clinician.</p>
+    <h1 data-reveal aria-label="Can You Diagnose This Fundus? Most Optometry Students Can't — Yet.">
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Can You Diagnose</span></span>
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">This Fundus?</span></span>
+    </h1>
+    <p class="hero-sub" data-reveal>Real fundus images. Real conditions. AI tells you if you're right. The fastest way to build clinical pattern recognition before you see a patient.</p>
+    <p class="hero-pain" data-reveal>You've memorized the textbook. But can you spot the pathology when it's staring back at you?</p>
     <div class="hero-buttons" data-reveal>
-      <a href="#prototype" class="btn-hero-primary">&#9654; Start Learning Free</a>
-      <a href="#how-it-works" class="btn-hero-secondary">See How It Works</a>
+      <a href="#prototype" class="btn-hero-primary" id="heroCta">See If You Can Diagnose It &rarr;</a>
+      <a href="#how-it-works" class="btn-hero-secondary">How It Works</a>
     </div>
+    <div class="hero-microcopy" data-reveal>Free · No signup · Your first case takes 30 seconds</div>
     <div class="hero-stats" data-reveal id="heroStats">
       <div class="hero-stat">
         <div class="hero-stat-value"><span data-count="50">0</span>+</div>
-        <div class="hero-stat-label">Real Fundus Cases</div>
+        <div class="hero-stat-label">Real Patient Cases</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value"><span data-count="10">0</span></div>
-        <div class="hero-stat-label">Ocular Conditions</div>
+        <div class="hero-stat-label">Conditions Covered</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-value"><span data-count="77.8" data-decimals="1">0</span>%</div>
-        <div class="hero-stat-label">Model Val Accuracy</div>
+        <div class="hero-stat-value">AI</div>
+        <div class="hero-stat-label">Instant Feedback</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value">NBEO</div>
         <div class="hero-stat-label">Exam Aligned</div>
       </div>
     </div>
+  </div>
+
+  <!-- Floating retina UI (desktop only) -->
+  <div class="hero-retina-float" id="heroRetina">
+    <div class="retina-eye">
+      <div class="retina-optic-disc"></div>
+      <div class="retina-vessel v1"></div>
+      <div class="retina-vessel v2"></div>
+      <div class="retina-vessel v3"></div>
+      <div class="retina-vessel v4"></div>
+      <div class="retina-dot d1"></div>
+      <div class="retina-dot d2"></div>
+      <div class="retina-dot d3"></div>
+      <div class="retina-scan-line"></div>
+    </div>
+    <div class="retina-tooltip">Microaneurysms detected</div>
   </div>
 </section>
 
@@ -1227,6 +1722,22 @@ section { padding: 100px 0; }
   </div>
 </div>
 
+<!-- ═══════ SOCIAL PROOF ═══════ -->
+<div class="social-proof" id="socialProof">
+  <div class="social-proof-label">Used by students at</div>
+  <div class="social-proof-logos">
+    <span class="social-proof-logo">University of Guelph</span>
+    <span class="social-proof-sep"></span>
+    <span class="social-proof-logo">University of Waterloo</span>
+    <span class="social-proof-sep"></span>
+    <span class="social-proof-logo">McMaster University</span>
+    <span class="social-proof-sep"></span>
+    <span class="social-proof-logo">Western University</span>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
 <!-- ═══════ 4. CORE PLATFORM ═══════ -->
 <section id="features">
   <div class="container">
@@ -1237,7 +1748,7 @@ section { padding: 100px 0; }
     </div>
     <div class="mode-cards-grid">
       <!-- Card 1: Practice Case Library -->
-      <div class="mode-card teal" data-reveal>
+      <div class="mode-card teal tilt-card" data-reveal>
         <div class="mode-icon teal">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         </div>
@@ -1251,7 +1762,7 @@ section { padding: 100px 0; }
         <a href="#prototype" class="mode-cta teal">Open Case Library <span class="arrow">&rarr;</span></a>
       </div>
       <!-- Card 2: Quiz & Training -->
-      <div class="mode-card blue" data-reveal>
+      <div class="mode-card blue tilt-card" data-reveal>
         <div class="mode-icon blue">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
         </div>
@@ -1264,7 +1775,7 @@ section { padding: 100px 0; }
         <a href="#prototype" class="mode-cta blue">Start Quiz Mode <span class="arrow">&rarr;</span></a>
       </div>
       <!-- Card 3: Student Dashboard -->
-      <div class="mode-card indigo" data-reveal>
+      <div class="mode-card indigo tilt-card" data-reveal>
         <div class="mode-icon indigo">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
         </div>
@@ -1279,6 +1790,8 @@ section { padding: 100px 0; }
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- ═══════ 5. DASHBOARD PREVIEW ═══════ -->
 <section id="dashboard">
@@ -1307,33 +1820,38 @@ section { padding: 100px 0; }
         <a href="#prototype" class="dash-btn-ghost">Start Quiz</a>
       </div>
       <!-- Stats -->
-      <div class="dash-stats">
+      <div class="dash-stats" id="dashStats">
         <div class="dash-stat-card">
-          <div class="dash-stat-label">Cases Completed</div>
+          <div class="dash-stat-tooltip">48% of total cases completed</div>
+          <div class="dash-stat-label">Cases Completed <span class="dash-pulse-dot"></span></div>
           <div class="progress-ring-container">
             <svg class="progress-ring" width="64" height="64" viewBox="0 0 64 64">
               <circle class="progress-ring-bg" cx="32" cy="32" r="28"/>
               <circle class="progress-ring-fill" cx="32" cy="32" r="28"
                 stroke-dasharray="175.93"
-                stroke-dashoffset="91.48"/>
+                stroke-dashoffset="175.93"
+                id="progressRing"/>
             </svg>
-            <div class="progress-ring-text">48%</div>
+            <div class="progress-ring-text" id="progressRingText">0%</div>
           </div>
-          <div class="dash-stat-value">24 / 50</div>
+          <div class="dash-stat-value"><span id="dashCasesCount">0</span> / 50</div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-label">Diagnostic Accuracy</div>
-          <div class="dash-stat-value">73%</div>
+          <div class="dash-stat-tooltip">Diagnostic accuracy across all cases</div>
+          <div class="dash-stat-label">Diagnostic Accuracy <span class="dash-blink-indicator"></span></div>
+          <div class="dash-stat-value"><span id="dashAccuracy">0</span>%</div>
           <div class="dash-stat-detail emerald">&#9650; +5% this week</div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-label">Confidence Calibration</div>
-          <div class="dash-stat-value">68%</div>
+          <div class="dash-stat-tooltip">Confidence calibration explained</div>
+          <div class="dash-stat-label">Confidence Calibration <span class="dash-pulse-dot amber"></span></div>
+          <div class="dash-stat-value"><span id="dashCalibration">0</span>%</div>
           <div class="dash-stat-detail amber">Slightly overconfident</div>
         </div>
         <div class="dash-stat-card">
-          <div class="dash-stat-label">Quiz Rank</div>
-          <div class="dash-stat-value">#14 / 87</div>
+          <div class="dash-stat-tooltip">Top 16% of cohort</div>
+          <div class="dash-stat-label">Quiz Rank <span class="dash-pulse-dot emerald"></span></div>
+          <div class="dash-stat-value">#<span id="dashRank">0</span> / 87</div>
           <div class="dash-stat-detail muted">Top 16% of cohort</div>
         </div>
       </div>
@@ -1354,6 +1872,8 @@ section { padding: 100px 0; }
   </div>
 </section>
 
+<div class="section-divider"></div>
+
 <!-- ═══════ 6. HOW IT WORKS ═══════ -->
 <section id="how-it-works">
   <div class="container">
@@ -1361,30 +1881,53 @@ section { padding: 100px 0; }
       <div class="section-label teal">HOW IT WORKS</div>
       <h2 class="section-heading">A learning loop that mirrors clinical practice.</h2>
     </div>
-    <div class="steps-grid">
-      <div class="step-card step-1" data-reveal>
-        <div class="step-badge c1">01</div>
-        <h3>Choose a Case</h3>
-        <p>Browse 50 real fundus images across 10 conditions. Filter by difficulty level — Beginner, Intermediate, or Advanced. Each case includes the original image, AI-generated teaching notes, and key findings to identify.</p>
+    <div class="steps-wrapper">
+      <div class="steps-connector">
+        <div class="steps-connector-line"></div>
+        <div class="steps-connector-node n1"></div>
+        <div class="steps-connector-node n2"></div>
+        <div class="steps-connector-node n3"></div>
+        <div class="steps-connector-node n4"></div>
       </div>
-      <div class="step-card step-2" data-reveal>
-        <div class="step-badge c2">02</div>
-        <h3>Analyze with AI Guidance</h3>
-        <p>Work through a guided diagnostic pathway. The AI overlay highlights regions of interest using Grad-CAM heatmaps. Identify biomarkers, note the disc, vessels, and macula, and form your differential diagnosis.</p>
-      </div>
-      <div class="step-card step-3" data-reveal>
-        <div class="step-badge c3">03</div>
-        <h3>Submit Your Diagnosis</h3>
-        <p>Enter your top condition, rate your confidence level, and submit. The system compares your answer to the AI's structured output and scores your accuracy, specificity, and calibration.</p>
-      </div>
-      <div class="step-card step-4" data-reveal>
-        <div class="step-badge c4">04</div>
-        <h3>Review, Track, Repeat</h3>
-        <p>Get immediate feedback with clinical explanations. Your results feed into your dashboard — updating your accuracy score, confidence calibration, and adaptive case recommendations. Complete quizzes to reinforce your learning.</p>
+      <div class="steps-grid">
+        <div class="step-card step-1 tilt-card" data-reveal>
+          <div class="step-icon-visual c1">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2dd4bf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <div class="step-badge c1">01</div>
+          <h3>Choose a Case</h3>
+          <p>Browse 50 real fundus images across 10 conditions. Filter by difficulty level — Beginner, Intermediate, or Advanced. Each case includes the original image, AI-generated teaching notes, and key findings to identify.</p>
+        </div>
+        <div class="step-card step-2 tilt-card" data-reveal>
+          <div class="step-icon-visual c2">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+          </div>
+          <div class="step-badge c2">02</div>
+          <h3>Analyze with AI Guidance</h3>
+          <p>Work through a guided diagnostic pathway. The AI overlay highlights regions of interest using Grad-CAM heatmaps. Identify biomarkers, note the disc, vessels, and macula, and form your differential diagnosis.</p>
+        </div>
+        <div class="step-card step-3 tilt-card" data-reveal>
+          <div class="step-icon-visual c3">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="step-badge c3">03</div>
+          <h3>Submit Your Diagnosis</h3>
+          <p>Enter your top condition, rate your confidence level, and submit. The system compares your answer to the AI's structured output and scores your accuracy, specificity, and calibration.</p>
+        </div>
+        <div class="step-card step-4 tilt-card" data-reveal>
+          <div class="step-icon-visual c4">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <div class="step-badge c4">04</div>
+          <h3>Review, Track, Repeat</h3>
+          <p>Get immediate feedback with clinical explanations. Your results feed into your dashboard — updating your accuracy score, confidence calibration, and adaptive case recommendations. Complete quizzes to reinforce your learning.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- ═══════ 7. CONDITIONS ═══════ -->
 <section id="conditions">
@@ -1499,7 +2042,7 @@ section { padding: 100px 0; }
       <h2 class="section-heading">Built on real ML research.</h2>
     </div>
     <div class="tech-grid">
-      <div class="tech-card" data-reveal>
+      <div class="tech-card tilt-card" data-reveal>
         <span class="tech-tag teal">CLASSIFICATION MODEL</span>
         <h3>EfficientNetB0 Classifier</h3>
         <div class="tech-stats">
@@ -1509,7 +2052,7 @@ section { padding: 100px 0; }
           <div class="tech-stat">RFMID + APTOS datasets</div>
         </div>
       </div>
-      <div class="tech-card" data-reveal>
+      <div class="tech-card tilt-card" data-reveal>
         <span class="tech-tag blue">EXPLAINABILITY</span>
         <h3>Grad-CAM + SHAP</h3>
         <div class="tech-stats">
@@ -1519,7 +2062,7 @@ section { padding: 100px 0; }
           <div class="tech-stat">Visual + numeric explanation modes</div>
         </div>
       </div>
-      <div class="tech-card" data-reveal>
+      <div class="tech-card tilt-card" data-reveal>
         <span class="tech-tag violet">SEGMENTATION</span>
         <h3>U-Net Vessel Segmentation</h3>
         <div class="tech-stats">
@@ -1529,7 +2072,7 @@ section { padding: 100px 0; }
           <div class="tech-stat">Vessel caliber mapping</div>
         </div>
       </div>
-      <div class="tech-card" data-reveal>
+      <div class="tech-card tilt-card" data-reveal>
         <span class="tech-tag emerald">ADAPTIVE LEARNING</span>
         <h3>Adaptive Learning Engine</h3>
         <div class="tech-stats">
@@ -1601,16 +2144,59 @@ section { padding: 100px 0; }
   </div>
 </section>
 
+<!-- ═══════ WHY THIS MATTERS ═══════ -->
+<section class="why-section" id="why-matters">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="section-label teal">THE DIFFERENCE</div>
+      <h2 class="section-heading">Why students are switching to RetinaScan</h2>
+    </div>
+    <div class="why-grid" data-reveal>
+      <div class="why-column traditional">
+        <div class="why-column-icon">&#128683;</div>
+        <div class="why-column-title">Traditional Learning</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Static textbook images</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Rote memorization</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> No real-time feedback</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Same cases for everyone</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> No progress tracking</div>
+      </div>
+      <div class="why-column retinascan">
+        <div class="why-column-icon">&#9889;</div>
+        <div class="why-column-title">RetinaScan</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Real clinical fundus cases</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> AI-powered feedback</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Instant diagnostic scoring</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Adaptive case selection</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Confidence calibration</div>
+      </div>
+      <div class="why-column outcome">
+        <div class="why-column-icon">&#127919;</div>
+        <div class="why-column-title">Outcome</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Faster pattern recognition</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Better exam performance</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Real clinical intuition</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Know your weak spots</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Measurable improvement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- ═══════ 12. FINAL CTA ═══════ -->
 <section class="final-cta" id="launch">
   <div class="final-cta-glow"></div>
   <div class="container">
     <h2 class="section-heading" data-reveal>Ready to train like a clinician?</h2>
     <p class="final-cta-sub" data-reveal>Start free. Practice real cases. Build the diagnostic eye that sets great clinicians apart.</p>
+    <div class="final-cta-urgency" data-reveal>Join early — limited access during prototype phase</div>
     <div class="final-buttons" data-reveal>
       <a href="#prototype" class="btn-final-primary">&#9654; Launch the Prototype</a>
       <a href="#features" class="btn-final-ghost">Learn More</a>
     </div>
+    <div class="final-cta-trust" data-reveal>Free. No signup required. Built by students.</div>
     <p class="fine-print" data-reveal>Free to start · No account required · Educational use only</p>
   </div>
 </section>
@@ -1711,8 +2297,27 @@ section { padding: 100px 0; }
   initParticles();
   drawParticles();
 
-  /* ─── Scroll Reveal ─── */
-  var revealElements = document.querySelectorAll('[data-reveal]');
+  /* ─── Mouse-Reactive Glow ─── */
+  var heroSection = document.getElementById('hero');
+  var mouseGlow = document.getElementById('heroMouseGlow');
+  heroSection.addEventListener('mousemove', function(e) {
+    var rect = heroSection.getBoundingClientRect();
+    mouseGlow.style.left = (e.clientX - rect.left) + 'px';
+    mouseGlow.style.top = (e.clientY - rect.top) + 'px';
+  }, { passive: true });
+
+  /* ─── Hero Text Entrance ─── */
+  var heroLine1 = document.getElementById('heroLine1');
+  var heroLine2 = document.getElementById('heroLine2');
+  setTimeout(function() {
+    heroLine1.classList.add('animate-in');
+  }, 300);
+  setTimeout(function() {
+    heroLine2.classList.add('animate-in');
+  }, 500);
+
+  /* ─── Scroll Reveal (Enhanced) ─── */
+  var revealElements = document.querySelectorAll('[data-reveal], [data-reveal-stagger]');
   var revealObserver = new IntersectionObserver(function(entries) {
     entries.forEach(function(entry) {
       if (entry.isIntersecting) {
@@ -1723,6 +2328,18 @@ section { padding: 100px 0; }
   }, { threshold: 0.1 });
 
   revealElements.forEach(function(el) { revealObserver.observe(el); });
+
+  /* ─── Social Proof Reveal ─── */
+  var socialProof = document.getElementById('socialProof');
+  var socialObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        socialObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  socialObserver.observe(socialProof);
 
   /* ─── Stat Counter Animation ─── */
   var statsRevealed = false;
@@ -1758,6 +2375,116 @@ section { padding: 100px 0; }
       requestAnimationFrame(step);
     });
   }
+
+  /* ─── Dashboard Stats Animation ─── */
+  var dashRevealed = false;
+  var dashStatsEl = document.getElementById('dashStats');
+  var dashObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !dashRevealed) {
+        dashRevealed = true;
+        animateDashboard();
+        dashObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  dashObserver.observe(dashStatsEl);
+
+  function animateDashboard() {
+    var duration = 1800;
+    var startTime = null;
+    var targetCases = 24;
+    var targetAccuracy = 73;
+    var targetCalibration = 68;
+    var targetRank = 14;
+    var RING_CIRCUMFERENCE = 175.93; // 2 * PI * 28 (ring radius)
+    var targetRingOffset = 91.48; // target offset for 48%
+
+    var casesEl = document.getElementById('dashCasesCount');
+    var accuracyEl = document.getElementById('dashAccuracy');
+    var calibrationEl = document.getElementById('dashCalibration');
+    var rankEl = document.getElementById('dashRank');
+    var ringEl = document.getElementById('progressRing');
+    var ringTextEl = document.getElementById('progressRingText');
+
+    function step(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+
+      casesEl.textContent = Math.floor(eased * targetCases);
+      accuracyEl.textContent = Math.floor(eased * targetAccuracy);
+      calibrationEl.textContent = Math.floor(eased * targetCalibration);
+      rankEl.textContent = Math.floor(eased * targetRank);
+
+      var currentOffset = RING_CIRCUMFERENCE - (RING_CIRCUMFERENCE - targetRingOffset) * eased;
+      ringEl.setAttribute('stroke-dashoffset', currentOffset.toFixed(2));
+      ringTextEl.textContent = Math.floor(eased * 48) + '%';
+
+      if (progress < 1) requestAnimationFrame(step);
+      else {
+        casesEl.textContent = targetCases;
+        accuracyEl.textContent = targetAccuracy;
+        calibrationEl.textContent = targetCalibration;
+        rankEl.textContent = targetRank;
+        ringEl.setAttribute('stroke-dashoffset', targetRingOffset.toFixed(2));
+        ringTextEl.textContent = '48%';
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ─── Card Tilt Effect ─── */
+  var tiltCards = document.querySelectorAll('.tilt-card');
+  tiltCards.forEach(function(card) {
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      var centerX = rect.width / 2;
+      var centerY = rect.height / 2;
+      var rotateX = ((y - centerY) / centerY) * -3;
+      var rotateY = ((x - centerX) / centerX) * 3;
+      card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale(1.02)';
+    });
+    card.addEventListener('mouseleave', function() {
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+    });
+  });
+
+  /* ─── Parallax Effect ─── */
+  var heroGlow = document.querySelector('.hero-glow');
+  var heroRings = document.querySelector('.hero-rings');
+  window.addEventListener('scroll', function() {
+    var scrollY = window.pageYOffset;
+    var parallaxFactor = 0.2;
+    if (heroGlow) {
+      heroGlow.style.transform = 'translate(-50%, calc(-50% + ' + (scrollY * parallaxFactor) + 'px))';
+    }
+    if (heroRings) {
+      heroRings.style.transform = 'translate(-50%, calc(-50% + ' + (scrollY * parallaxFactor * 0.5) + 'px))';
+    }
+  }, { passive: true });
+
+  /* ─── Button Ripple Effect ─── */
+  var rippleTargets = document.querySelectorAll('.btn-hero-primary, .btn-final-primary, .btn-cta, .dash-btn-primary, .dash-rec-btn');
+  rippleTargets.forEach(function(btn) {
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.addEventListener('click', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var ripple = document.createElement('span');
+      ripple.classList.add('ripple');
+      var size = Math.max(rect.width, rect.height);
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', function() {
+        ripple.remove();
+      });
+    });
+  });
 
   /* ─── Mobile Menu Toggle ─── */
   var hamburger = document.getElementById('hamburger');

@@ -2285,7 +2285,7 @@ section { padding: 100px 0; }
     var rect = heroSection.getBoundingClientRect();
     mouseGlow.style.left = (e.clientX - rect.left) + 'px';
     mouseGlow.style.top = (e.clientY - rect.top) + 'px';
-  });
+  }, { passive: true });
 
   /* ─── Hero Text Entrance ─── */
   var heroLine1 = document.getElementById('heroLine1');
@@ -2378,6 +2378,7 @@ section { padding: 100px 0; }
     var targetAccuracy = 73;
     var targetCalibration = 68;
     var targetRank = 14;
+    var RING_CIRCUMFERENCE = 175.93; // 2 * PI * 28 (ring radius)
     var targetRingOffset = 91.48; // target offset for 48%
 
     var casesEl = document.getElementById('dashCasesCount');
@@ -2397,7 +2398,7 @@ section { padding: 100px 0; }
       calibrationEl.textContent = Math.floor(eased * targetCalibration);
       rankEl.textContent = Math.floor(eased * targetRank);
 
-      var currentOffset = 175.93 - (175.93 - targetRingOffset) * eased;
+      var currentOffset = RING_CIRCUMFERENCE - (RING_CIRCUMFERENCE - targetRingOffset) * eased;
       ringEl.setAttribute('stroke-dashoffset', currentOffset.toFixed(2));
       ringTextEl.textContent = Math.floor(eased * 48) + '%';
 

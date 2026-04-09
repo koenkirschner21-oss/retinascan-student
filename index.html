@@ -1758,8 +1758,10 @@ section { padding: 100px 0; }
 
   /* ─── Mobile Menu Toggle ─── */
   var hamburger = document.getElementById('hamburger');
-  hamburger.addEventListener('click', function() {
-    document.body.classList.toggle('mobile-menu-open');
+  function toggleMenu() { document.body.classList.toggle('mobile-menu-open'); }
+  hamburger.addEventListener('click', toggleMenu);
+  hamburger.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
   });
 
   /* Close mobile menu on link click */

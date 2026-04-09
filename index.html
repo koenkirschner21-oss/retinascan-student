@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RetinaScan — Student Learning Platform</title>
-<meta name="description" content="Practice reading real retinal fundus images with AI-powered feedback. Built for optometry students. Train diagnostic pattern recognition from classroom to clinic.">
+<title>RetinaScan — Practice Reading Real Fundus Images | Optometry Student Training</title>
+<meta name="description" content="Free retina scan practice for optometry students. Read real fundus images, get AI feedback on your diagnosis, and track your progress across 50+ cases and 10 conditions. No signup required.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -305,8 +305,17 @@ section { padding: 100px 0; }
   font-weight: 300;
   color: var(--text-body);
   max-width: 600px;
-  margin: 0 auto 36px;
+  margin: 0 auto 20px;
   line-height: 1.6;
+}
+
+.hero-pain {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.5;
 }
 
 .hero-buttons {
@@ -315,7 +324,15 @@ section { padding: 100px 0; }
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.hero-microcopy {
+  font-size: 13px;
+  color: var(--text-fine);
+  text-align: center;
   margin-bottom: 32px;
+  letter-spacing: 0.01em;
 }
 
 .btn-hero-primary {
@@ -1599,7 +1616,7 @@ section { padding: 100px 0; }
       </ul>
       <div class="nav-actions">
         <a href="#login" class="btn-ghost">Log In</a>
-        <a href="#prototype" class="btn-cta">Start Learning <span class="arrow">&rarr;</span></a>
+        <a href="#prototype" class="btn-cta">Try a Case <span class="arrow">&rarr;</span></a>
       </div>
     </div>
 
@@ -1625,29 +1642,31 @@ section { padding: 100px 0; }
   <div class="hero-content">
     <div class="hero-eyebrow" data-reveal>
       <span class="eyebrow-dot"></span>
-      BUILT FOR OPTOMETRY STUDENTS
+      FREE OPTOMETRY TRAINING TOOL
     </div>
-    <h1 data-reveal>
-      <span class="hero-line"><span class="hero-line-inner" id="heroLine1">From Classroom</span></span>
-      <span class="hero-line"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">to Clinic.</span></span>
+    <h1 data-reveal aria-label="Can You Read This Scan?">
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Can You Read</span></span>
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">This Scan?</span></span>
     </h1>
-    <p class="hero-sub" data-reveal>Practice reading real retinal fundus images. Get AI-powered feedback on your diagnoses. Build the visual pattern recognition that defines a great clinician.</p>
+    <p class="hero-sub" data-reveal>Practice diagnosing real fundus images and get instant AI feedback — the clinical skill your textbook can't teach you.</p>
+    <p class="hero-pain" data-reveal>Most students see their first real retinal scan on a patient. You don't have to.</p>
     <div class="hero-buttons" data-reveal>
-      <a href="#prototype" class="btn-hero-primary" id="heroCta">&#9654; Start Learning Free</a>
+      <a href="#prototype" class="btn-hero-primary" id="heroCta">Try Your First Case &rarr;</a>
       <a href="#how-it-works" class="btn-hero-secondary">See How It Works</a>
     </div>
+    <div class="hero-microcopy" data-reveal>No signup required · Free for students · Takes 30 seconds</div>
     <div class="hero-stats" data-reveal id="heroStats">
       <div class="hero-stat">
         <div class="hero-stat-value"><span data-count="50">0</span>+</div>
-        <div class="hero-stat-label">Real Fundus Cases</div>
+        <div class="hero-stat-label">Real Patient Cases</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value"><span data-count="10">0</span></div>
-        <div class="hero-stat-label">Ocular Conditions</div>
+        <div class="hero-stat-label">Conditions Covered</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-value"><span data-count="77.8" data-decimals="1">0</span>%</div>
-        <div class="hero-stat-label">Model Val Accuracy</div>
+        <div class="hero-stat-value">AI</div>
+        <div class="hero-stat-label">Instant Feedback</div>
       </div>
       <div class="hero-stat">
         <div class="hero-stat-value">NBEO</div>

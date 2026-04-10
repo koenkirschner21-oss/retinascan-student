@@ -173,8 +173,8 @@
       "key_findings": ["microaneurysms", "hard_exudates", "flame_hemorrhages"],
       "biomarkers_present": ["retinal_hemorrhage", "lipid_exudate"],
       "approximate_coords": {
-        "optic_disc": [256, 256],
-        "macula": [512, 512],
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
         "key_finding_1": [300, 280]
       },
       "clinical_notes": "Moderate non-proliferative DR with perimacula hard exudates and flame hemorrhages in the superior arcade.",

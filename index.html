@@ -193,13 +193,6 @@ section { padding: 100px 0; }
   overflow: hidden;
 }
 
-.hero-canvas {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-}
-
 .hero-glow {
   position: absolute;
   top: 50%; left: 50%;
@@ -208,31 +201,6 @@ section { padding: 100px 0; }
   background: radial-gradient(circle, rgba(45,212,191,0.06) 0%, transparent 70%);
   z-index: 1;
   pointer-events: none;
-}
-
-.hero-rings {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.ring {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%) scale(0.8);
-  border: 1px solid rgba(45,212,191,0.04);
-  border-radius: 50%;
-  animation: ringPulse 4s ease-out infinite;
-}
-.ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
-.ring:nth-child(2) { width: 300px; height: 300px; animation-delay: 1.3s; }
-.ring:nth-child(3) { width: 300px; height: 300px; animation-delay: 2.6s; }
-
-@keyframes ringPulse {
-  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.6; }
-  100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
 }
 
 .hero-fade {
@@ -1159,112 +1127,50 @@ section { padding: 100px 0; }
 }
 .btn-hero-primary:hover { transform: scale(1.03); }
 
-/* ───── FLOATING RETINA UI ───── */
-.hero-retina-float {
-  position: absolute;
-  right: -60px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 280px;
-  height: 280px;
-  z-index: 3;
-  animation: floatUpDown 4s ease-in-out infinite;
-  pointer-events: auto;
-}
-@keyframes floatUpDown {
-  0%, 100% { transform: translateY(-50%); }
-  50% { transform: translateY(calc(-50% - 12px)); }
-}
-.retina-eye {
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 40%, #c97a3a 0%, #8B4513 25%, #5a2d0c 50%, #3d1a06 70%, #1a0a02 100%);
-  position: relative;
-  margin: 0 auto;
-  box-shadow: 0 0 40px rgba(45,212,191,0.15), 0 0 80px rgba(45,212,191,0.08), inset 0 0 30px rgba(0,0,0,0.4);
-  overflow: visible;
-}
-.retina-optic-disc {
-  position: absolute;
-  width: 40px; height: 40px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #f5d5a0 0%, #d4a76a 60%, #b8864a 100%);
-  top: 45%; left: 58%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px rgba(245,213,160,0.3);
-}
-.retina-vessel {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform-origin: 0 0;
-}
-.retina-vessel::after {
-  content: '';
-  position: absolute;
-  height: 1.5px;
-  background: linear-gradient(90deg, rgba(139,30,30,0.8), rgba(139,30,30,0.2));
-  border-radius: 1px;
-}
-.retina-vessel.v1 { transform: rotate(-25deg); }
-.retina-vessel.v1::after { width: 60px; }
-.retina-vessel.v2 { transform: rotate(15deg); }
-.retina-vessel.v2::after { width: 50px; }
-.retina-vessel.v3 { transform: rotate(45deg); }
-.retina-vessel.v3::after { width: 45px; }
-.retina-vessel.v4 { transform: rotate(-60deg); }
-.retina-vessel.v4::after { width: 55px; }
-
-.retina-dot {
-  position: absolute;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  border: 1.5px solid var(--teal);
-  background: transparent;
-  animation: dotPulse 2s ease-in-out infinite;
-}
-.retina-dot.d1 { top: 30%; left: 35%; animation-delay: 0s; }
-.retina-dot.d2 { top: 55%; left: 25%; animation-delay: 0.6s; }
-.retina-dot.d3 { top: 40%; left: 70%; animation-delay: 1.2s; }
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 0.7; box-shadow: 0 0 4px rgba(45,212,191,0.3); }
-  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 10px rgba(45,212,191,0.6); }
-}
-
-.retina-tooltip {
-  position: absolute;
-  bottom: -16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(15,23,42,0.95);
-  border: 1px solid rgba(45,212,191,0.3);
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--teal);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s, transform 0.3s;
-  pointer-events: none;
-  backdrop-filter: blur(8px);
-}
-.hero-retina-float:hover .retina-tooltip {
-  opacity: 1;
-  transform: translateX(-50%) translateY(4px);
-}
-.retina-scan-line {
+/* ───── HERO IMAGE GRID ───── */
+.hero-image-grid {
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.5), transparent);
-  animation: scanLine 3s ease-in-out infinite;
-  border-radius: 1px;
+  width: 100%; height: 100%;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  padding: 24px;
+  opacity: 0.15;
+  pointer-events: none;
 }
-@keyframes scanLine {
-  0% { top: 10%; opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.8; }
-  100% { top: 90%; opacity: 0; }
+
+.hero-image-grid .fundus-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  filter: grayscale(30%);
+}
+
+/* Placeholder for when images aren't loaded yet */
+.hero-image-grid .fundus-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: radial-gradient(ellipse at 45% 45%, #5a2d0c 0%, #3d1a06 40%, #1a0a02 80%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image-grid .fundus-placeholder::after {
+  content: '';
+  position: absolute;
+  width: 22%;
+  height: 22%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5d5a0 0%, #d4a76a 60%, #b8864a 100%);
+  top: 42%;
+  left: 56%;
+  transform: translate(-50%, -50%);
+  opacity: 0.7;
 }
 
 /* ───── SOCIAL PROOF ───── */
@@ -1565,7 +1471,7 @@ section { padding: 100px 0; }
   .dash-stats { grid-template-columns: repeat(2, 1fr); }
   .case-cards-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 24px; }
-  .hero-retina-float { display: none; }
+  .hero-image-grid { grid-template-columns: repeat(2, 1fr); }
   .why-grid { grid-template-columns: 1fr; }
   .why-column { border-radius: 0 !important; }
   .why-column:first-child { border-radius: 16px 16px 0 0 !important; }
@@ -1629,32 +1535,36 @@ section { padding: 100px 0; }
 <main>
 <!-- ═══════ 2. HERO ═══════ -->
 <section class="hero" id="hero">
-  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-image-grid">
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+    <div class="fundus-placeholder"></div>
+  </div>
   <div class="hero-glow"></div>
   <div class="hero-mouse-glow" id="heroMouseGlow"></div>
-  <div class="hero-rings">
-    <div class="ring"></div>
-    <div class="ring"></div>
-    <div class="ring"></div>
-  </div>
   <div class="hero-fade"></div>
 
   <div class="hero-content">
     <div class="hero-eyebrow" data-reveal>
       <span class="eyebrow-dot"></span>
-      FREE RETINA SCAN PRACTICE FOR STUDENTS
+      AI-POWERED RETINAL DIAGNOSTIC TRAINING
     </div>
-    <h1 data-reveal aria-label="Can You Diagnose This Fundus? Most Optometry Students Can't — Yet.">
-      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Can You Diagnose</span></span>
-      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">This Fundus?</span></span>
+    <h1 data-reveal aria-label="Master Retinal Diagnostics">
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Master Retinal</span></span>
+      <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">Diagnostics</span></span>
     </h1>
-    <p class="hero-sub" data-reveal>Real fundus images. Real conditions. AI tells you if you're right. The fastest way to build clinical pattern recognition before you see a patient.</p>
-    <p class="hero-pain" data-reveal>You've memorized the textbook. But can you spot the pathology when it's staring back at you?</p>
+    <p class="hero-sub" data-reveal>50+ authenticated clinical fundus photographs with AI-powered analysis. Build diagnostic accuracy using explainable AI &mdash; EfficientNetB0 classifier with Grad-CAM and SHAP explanations.</p>
+    <p class="hero-pain" data-reveal>Designed for medical students, optometry trainees, and ophthalmology residents. Built by U of Guelph students with clinical oversight.</p>
     <div class="hero-buttons" data-reveal>
-      <a href="#prototype" class="btn-hero-primary" id="heroCta">See If You Can Diagnose It &rarr;</a>
-      <a href="#how-it-works" class="btn-hero-secondary">How It Works</a>
+      <a href="#prototype" class="btn-hero-primary" id="heroCta">Start Learning Free &rarr;</a>
+      <a href="#how-it-works" class="btn-hero-secondary">Explore Cases</a>
     </div>
-    <div class="hero-microcopy" data-reveal>Free · No signup · Your first case takes 30 seconds</div>
+    <div class="hero-microcopy" data-reveal>Free · No signup required · 50+ real clinical cases · NBEO exam aligned</div>
     <div class="hero-stats" data-reveal id="heroStats">
       <div class="hero-stat">
         <div class="hero-stat-value"><span data-count="50">0</span>+</div>
@@ -1665,30 +1575,14 @@ section { padding: 100px 0; }
         <div class="hero-stat-label">Conditions Covered</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-value">AI</div>
-        <div class="hero-stat-label">Instant Feedback</div>
+        <div class="hero-stat-value"><span data-count="77">0</span>.<span data-count="8">0</span>%</div>
+        <div class="hero-stat-label">AI Accuracy</div>
       </div>
       <div class="hero-stat">
-        <div class="hero-stat-value">NBEO</div>
-        <div class="hero-stat-label">Exam Aligned</div>
+        <div class="hero-stat-value"><span data-count="16">0</span>K+</div>
+        <div class="hero-stat-label">Training Images</div>
       </div>
     </div>
-  </div>
-
-  <!-- Floating retina UI (desktop only) -->
-  <div class="hero-retina-float" id="heroRetina">
-    <div class="retina-eye">
-      <div class="retina-optic-disc"></div>
-      <div class="retina-vessel v1"></div>
-      <div class="retina-vessel v2"></div>
-      <div class="retina-vessel v3"></div>
-      <div class="retina-vessel v4"></div>
-      <div class="retina-dot d1"></div>
-      <div class="retina-dot d2"></div>
-      <div class="retina-dot d3"></div>
-      <div class="retina-scan-line"></div>
-    </div>
-    <div class="retina-tooltip">Microaneurysms detected</div>
   </div>
 </section>
 
@@ -2234,69 +2128,6 @@ section { padding: 100px 0; }
 (function() {
   'use strict';
 
-  /* ─── Particle Canvas ─── */
-  var canvas = document.getElementById('heroCanvas');
-  var ctx = canvas.getContext('2d');
-  var particles = [];
-  var PARTICLE_COUNT = 60;
-  var CONNECTION_DIST = 120;
-
-  function resizeCanvas() {
-    canvas.width = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
-  }
-
-  function initParticles() {
-    particles = [];
-    for (var i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4
-      });
-    }
-  }
-
-  function drawParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    for (var i = 0; i < particles.length; i++) {
-      var p = particles[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-      if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(45,212,191,0.5)';
-      ctx.fill();
-
-      for (var j = i + 1; j < particles.length; j++) {
-        var p2 = particles[j];
-        var dx = p.x - p2.x;
-        var dy = p.y - p2.y;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECTION_DIST) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = 'rgba(45,212,191,' + (0.12 * (1 - dist / CONNECTION_DIST)) + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      }
-    }
-    requestAnimationFrame(drawParticles);
-  }
-
-  window.addEventListener('resize', function() {
-    resizeCanvas();
-  });
-  resizeCanvas();
-  initParticles();
-  drawParticles();
-
   /* ─── Mouse-Reactive Glow ─── */
   var heroSection = document.getElementById('hero');
   var mouseGlow = document.getElementById('heroMouseGlow');
@@ -2454,15 +2285,11 @@ section { padding: 100px 0; }
 
   /* ─── Parallax Effect ─── */
   var heroGlow = document.querySelector('.hero-glow');
-  var heroRings = document.querySelector('.hero-rings');
   window.addEventListener('scroll', function() {
     var scrollY = window.pageYOffset;
     var parallaxFactor = 0.2;
     if (heroGlow) {
       heroGlow.style.transform = 'translate(-50%, calc(-50% + ' + (scrollY * parallaxFactor) + 'px))';
-    }
-    if (heroRings) {
-      heroRings.style.transform = 'translate(-50%, calc(-50% + ' + (scrollY * parallaxFactor * 0.5) + 'px))';
     }
   }, { passive: true });
 

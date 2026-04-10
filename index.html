@@ -135,10 +135,9 @@ section { padding: 100px 0; }
 .nav-links a {
   font-size: 14px;
   color: var(--text-muted);
-  transition: color 0.2s, letter-spacing 0.2s;
+  transition: color 0.2s;
   padding: 4px 0;
   position: relative;
-  letter-spacing: 0;
 }
 .nav-links a::after {
   content: '';
@@ -150,7 +149,7 @@ section { padding: 100px 0; }
   background: var(--teal);
   transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.nav-links a:hover { color: #ffffff; letter-spacing: 0.01em; }
+.nav-links a:hover { color: #ffffff; }
 .nav-links a:hover::after { width: 100%; }
 .nav-links a.active { color: #ffffff; }
 .nav-links a.active::after { width: 100%; }
@@ -1925,13 +1924,13 @@ section { padding: 100px 0; }
 
 /* ── Interactive Hero Challenge ── */
 .hero-challenge {
-  background: rgba(15,23,42,0.92);
-  border: 1px solid rgba(45,212,191,0.18);
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(45,212,191,0.15);
   border-radius: 20px;
   overflow: hidden;
   box-shadow:
-    0 24px 80px rgba(0,0,0,0.45),
-    0 0 60px rgba(45,212,191,0.05),
+    0 24px 80px rgba(0,0,0,0.5),
+    0 0 40px rgba(45,212,191,0.04),
     inset 0 1px 0 rgba(255,255,255,0.04);
 }
 
@@ -1939,7 +1938,7 @@ section { padding: 100px 0; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  padding: 14px 24px;
   border-bottom: 1px solid var(--border-default);
 }
 .challenge-case-id {
@@ -1948,6 +1947,17 @@ section { padding: 100px 0; }
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--teal);
+}
+.challenge-difficulty {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--warning);
+  background: rgba(251,191,36,0.08);
+  border: 1px solid rgba(251,191,36,0.15);
+  border-radius: 6px;
+  padding: 3px 10px;
 }
 .challenge-timer {
   font-size: 11px;
@@ -1961,22 +1971,22 @@ section { padding: 100px 0; }
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--success);
-  animation: blink 1.5s infinite;
+  animation: blink 2s infinite;
 }
 
 .challenge-fundus-area {
   position: relative;
   display: flex;
   justify-content: center;
-  padding: 32px;
-  background: rgba(0,0,0,0.3);
+  padding: 28px 32px;
+  background: rgba(0,0,0,0.25);
 }
 .challenge-fundus {
-  width: 160px; height: 160px;
+  width: 180px; height: 180px;
   border-radius: 50%;
   background: radial-gradient(circle at 45% 45%, #8B4513 0%, #5a2d0c 30%, #3d1a06 60%, #1a0a02 100%);
   position: relative;
-  box-shadow: 0 0 40px rgba(139,69,19,0.25);
+  box-shadow: 0 0 40px rgba(139,69,19,0.2), 0 0 0 1px rgba(45,212,191,0.08);
 }
 .challenge-fundus::after {
   content: '';
@@ -1992,58 +2002,58 @@ section { padding: 100px 0; }
   content: '';
   position: absolute; inset: 0;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 60% 50%, rgba(45,212,191,0.15) 0%, rgba(45,212,191,0.05) 40%, transparent 70%);
+  background: radial-gradient(ellipse at 60% 50%, rgba(45,212,191,0.1) 0%, rgba(45,212,191,0.03) 40%, transparent 70%);
   z-index: 1;
 }
 
-/* AI detection markers */
+/* AI detection markers — subtle */
 .ai-marker {
   position: absolute;
-  border: 1.5px solid rgba(45,212,191,0.6);
+  border: 1.5px solid rgba(45,212,191,0.35);
   border-radius: 50%;
   z-index: 2;
-  animation: markerPulse 2.5s ease-in-out infinite;
+  animation: markerPulse 3s ease-in-out infinite;
 }
 .ai-marker::after {
   content: '';
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 1px solid rgba(45,212,191,0.2);
+  border: 1px solid rgba(45,212,191,0.1);
 }
-.ai-marker-1 { width: 32px; height: 32px; top: 22%; left: 30%; animation-delay: 0s; }
-.ai-marker-2 { width: 24px; height: 24px; top: 55%; left: 65%; animation-delay: 0.8s; }
-.ai-marker-3 { width: 20px; height: 20px; top: 35%; left: 58%; animation-delay: 1.6s; }
+.ai-marker-1 { width: 30px; height: 30px; top: 22%; left: 30%; animation-delay: 0s; }
+.ai-marker-2 { width: 22px; height: 22px; top: 55%; left: 65%; animation-delay: 1s; }
+.ai-marker-3 { width: 18px; height: 18px; top: 35%; left: 58%; animation-delay: 2s; }
 @keyframes markerPulse {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.15); }
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.1); }
 }
 
-/* Scan line animation */
+/* Scan line animation — subtle */
 .scan-line {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.6), transparent);
   z-index: 3;
-  opacity: 0.7;
-  animation: scanSweep 3s ease-in-out infinite;
+  opacity: 0.5;
+  animation: scanSweep 4s ease-in-out infinite;
   border-radius: 50%;
   pointer-events: none;
 }
 @keyframes scanSweep {
   0% { top: 10%; opacity: 0; }
-  10% { opacity: 0.7; }
-  90% { opacity: 0.7; }
+  15% { opacity: 0.5; }
+  85% { opacity: 0.5; }
   100% { top: 90%; opacity: 0; }
 }
 
 .challenge-prompt {
-  padding: 16px 20px 0;
+  padding: 20px 24px 4px;
   text-align: center;
 }
 .challenge-prompt-text {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   color: #ffffff;
   margin-bottom: 4px;
@@ -2054,48 +2064,59 @@ section { padding: 100px 0; }
 }
 
 .challenge-options {
-  padding: 12px 20px 8px;
+  padding: 14px 24px 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 .challenge-option {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--text-secondary);
-  background: rgba(15,23,42,0.6);
+  background: rgba(15,23,42,0.5);
   border: 1px solid var(--border-default);
   border-radius: 10px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 .challenge-option:hover {
-  border-color: rgba(45,212,191,0.4);
-  background: rgba(45,212,191,0.05);
+  border-color: rgba(45,212,191,0.35);
+  background: rgba(45,212,191,0.04);
   color: #ffffff;
 }
 .challenge-option.selected {
   border-color: var(--teal);
-  background: rgba(45,212,191,0.08);
+  background: rgba(45,212,191,0.06);
   color: #ffffff;
+  box-shadow: 0 0 0 1px rgba(45,212,191,0.2);
+}
+.challenge-option.correct-reveal {
+  border-color: var(--success);
+  background: rgba(52,211,153,0.06);
+  box-shadow: 0 0 0 1px rgba(52,211,153,0.2);
+}
+.challenge-option.wrong-reveal {
+  border-color: var(--danger);
+  background: rgba(248,113,113,0.04);
+  opacity: 0.7;
 }
 .challenge-option-letter {
   font-size: 10px;
   font-weight: 700;
   color: var(--teal);
-  background: rgba(45,212,191,0.1);
+  background: rgba(45,212,191,0.08);
   border-radius: 4px;
-  padding: 2px 6px;
+  padding: 3px 7px;
   flex-shrink: 0;
 }
 
 .challenge-actions {
-  padding: 12px 20px 20px;
+  padding: 14px 24px 20px;
   text-align: center;
 }
 .challenge-btn {
@@ -2104,13 +2125,13 @@ section { padding: 100px 0; }
   color: #ffffff;
   background: linear-gradient(135deg, var(--teal-cta-from), var(--teal-cta-to));
   border-radius: 12px;
-  padding: 12px 28px;
+  padding: 13px 28px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   cursor: pointer;
   transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 16px rgba(20,184,166,0.25);
+  box-shadow: 0 4px 16px rgba(20,184,166,0.2);
   width: 100%;
   justify-content: center;
   border: none;
@@ -2118,30 +2139,44 @@ section { padding: 100px 0; }
 .challenge-btn:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(20,184,166,0.35);
+  box-shadow: 0 6px 24px rgba(20,184,166,0.3);
+}
+.challenge-btn:disabled,
+.challenge-btn.disabled {
+  opacity: 0.5;
+  cursor: default;
+  filter: none;
+  transform: none;
 }
 .challenge-micro {
   font-size: 11px;
   color: var(--text-fine);
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 /* Challenge result state (shown after click) */
 .challenge-result {
   display: none;
-  padding: 16px 20px 20px;
+  padding: 20px 24px 24px;
   border-top: 1px solid var(--border-default);
 }
-.challenge-result.visible { display: block; }
+.challenge-result.visible {
+  display: block;
+  animation: resultFadeIn 0.4s ease-out;
+}
+@keyframes resultFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .challenge-result-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  padding: 6px 14px;
-  border-radius: 8px;
-  margin-bottom: 12px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  margin-bottom: 14px;
 }
 .challenge-result-badge.correct {
   color: var(--success);
@@ -2150,14 +2185,48 @@ section { padding: 100px 0; }
 }
 .challenge-result-badge.incorrect {
   color: var(--danger);
-  background: rgba(248,113,113,0.1);
-  border: 1px solid rgba(248,113,113,0.2);
+  background: rgba(248,113,113,0.08);
+  border: 1px solid rgba(248,113,113,0.15);
+}
+/* Confidence bar in result */
+.challenge-confidence {
+  margin-bottom: 14px;
+}
+.challenge-confidence-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-fine);
+  margin-bottom: 6px;
+}
+.challenge-confidence-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(45,212,191,0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.challenge-confidence-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal-cta-from), var(--teal));
+  border-radius: 3px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.challenge-confidence-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+  float: right;
+  margin-top: 4px;
 }
 .challenge-result-text {
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  clear: both;
 }
 .challenge-result-cta {
   font-size: 13px;
@@ -2166,9 +2235,28 @@ section { padding: 100px 0; }
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  transition: gap 0.2s;
 }
-.challenge-result-cta:hover { text-decoration: underline; }
-.challenge-answered { pointer-events: none; opacity: 0.7; }
+.challenge-result-cta:hover { gap: 8px; }
+.challenge-answered { pointer-events: none; }
+.challenge-answered .challenge-option:not(.selected):not(.correct-reveal) { opacity: 0.5; }
+
+/* Trust line under challenge */
+.challenge-trust {
+  padding: 12px 24px 16px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-fine);
+  border-top: 1px solid rgba(51,65,85,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.challenge-trust-icon {
+  width: 14px; height: 14px;
+  opacity: 0.6;
+}
 
 /* ── Mobile refinements for split hero ── */
 @media (max-width: 1023px) {
@@ -2295,7 +2383,8 @@ section { padding: 100px 0; }
       <div class="hero-challenge" id="heroChallenge">
         <div class="challenge-header">
           <span class="challenge-case-id"><span aria-hidden="true">&#9679;</span> Case #DR-047</span>
-          <span class="challenge-timer"><span class="challenge-timer-dot"></span> Live Case</span>
+          <span class="challenge-difficulty">Intermediate</span>
+          <span class="challenge-timer"><span class="challenge-timer-dot"></span> Live</span>
         </div>
         <div class="challenge-fundus-area">
           <div class="challenge-fundus">
@@ -2321,8 +2410,17 @@ section { padding: 100px 0; }
         </div>
         <div class="challenge-result" id="challengeResult">
           <div class="challenge-result-badge correct" id="challengeResultBadge">&#10003; Correct!</div>
-          <div class="challenge-result-text" id="challengeResultText">Microaneurysms and hard exudates in the macula indicate early Diabetic Retinopathy. AI confidence: 87%.</div>
-          <a href="#prototype" class="challenge-result-cta">Try more cases &rarr;</a>
+          <div class="challenge-confidence" id="challengeConfidence">
+            <div class="challenge-confidence-label">AI Confidence</div>
+            <div class="challenge-confidence-bar"><div class="challenge-confidence-fill" id="challengeConfidenceFill"></div></div>
+            <span class="challenge-confidence-value" id="challengeConfidenceValue">87%</span>
+          </div>
+          <div class="challenge-result-text" id="challengeResultText">Microaneurysms and hard exudates in the macula indicate early Diabetic Retinopathy. Consider noting venous beading for severity grading.</div>
+          <a href="#prototype" class="challenge-result-cta">Try more cases <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <div class="challenge-trust">
+          <svg class="challenge-trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Built with real clinical cases &middot; Designed for optometry students
         </div>
       </div>
     </div>
@@ -3399,25 +3497,35 @@ section { padding: 100px 0; }
     challengeActions.style.display = 'none';
     var optionsContainer = document.getElementById('challengeOptions');
     optionsContainer.classList.add('challenge-answered');
-    selectedAnswer = null; /* reset to prevent re-interaction */
     var selected = optionsContainer.querySelector('.challenge-option.selected');
     var isCorrect = selected && selected.getAttribute('data-answer') === 'correct';
+    selectedAnswer = null; /* reset to prevent re-interaction */
+
+    /* Mark correct option green, wrong selected option red */
+    challengeOptions.forEach(function(o) {
+      if (o.getAttribute('data-answer') === 'correct') {
+        o.classList.add('correct-reveal');
+      } else if (o.classList.contains('selected')) {
+        o.classList.add('wrong-reveal');
+      }
+    });
+
     if (isCorrect) {
       challengeResultBadge.className = 'challenge-result-badge correct';
-      challengeResultBadge.innerHTML = '&#10003; Correct!';
-      challengeResultText.textContent = 'Microaneurysms and hard exudates in the macula indicate Diabetic Retinopathy. AI confidence: 87%. Nice work!';
+      challengeResultBadge.innerHTML = '&#10003; Correct &mdash; Well done!';
+      challengeResultText.textContent = 'Microaneurysms and hard exudates in the macula indicate early Diabetic Retinopathy. Consider noting venous beading for severity grading.';
     } else {
       challengeResultBadge.className = 'challenge-result-badge incorrect';
-      challengeResultBadge.innerHTML = '&#10007; Not quite';
-      challengeResultText.textContent = 'The correct answer is Diabetic Retinopathy. Look for microaneurysms and hard exudates near the macula. Try more cases to sharpen your skills.';
-      challengeOptions.forEach(function(o) {
-        if (o.getAttribute('data-answer') === 'correct') {
-          o.style.borderColor = 'var(--success)';
-          o.style.background = 'rgba(52,211,153,0.08)';
-        }
-      });
+      challengeResultBadge.innerHTML = '&#10007; Not quite &mdash; keep practicing';
+      challengeResultText.textContent = 'The correct answer is Diabetic Retinopathy. Look for microaneurysms (small red dots) and hard exudates (yellow deposits) near the macula. These are key early signs.';
     }
     challengeResult.classList.add('visible');
+
+    /* Animate confidence bar */
+    setTimeout(function() {
+      var fill = document.getElementById('challengeConfidenceFill');
+      if (fill) fill.style.width = '87%';
+    }, 200);
   });
 
   window.addEventListener('scroll', updateActiveNav, { passive: true });

@@ -823,6 +823,7 @@ section { padding: 100px 0; }
 }
 .case-difficulty.beginner { color: var(--success); background: rgba(52,211,153,0.1); }
 .case-difficulty.intermediate { color: var(--warning); background: rgba(251,191,36,0.1); }
+.case-difficulty.advanced { color: var(--danger); background: rgba(248,113,113,0.1); }
 
 .case-condition { font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 4px; }
 .case-finding { font-size: 12px; color: var(--text-fine); }
@@ -1828,7 +1829,7 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="section-header" data-reveal>
       <div class="section-label teal">WHAT YOU'LL LEARN TO DETECT</div>
-      <h2 class="section-heading">10 ocular conditions. Real fundus images.</h2>
+      <h2 class="section-heading">10 Clinical Conditions. Authenticated Fundus Images.</h2>
     </div>
     <div class="conditions-grid">
       <div class="condition-card" data-reveal>
@@ -1856,20 +1857,20 @@ section { padding: 100px 0; }
         <p>Flame hemorrhages · Disc edema · Dilated veins</p>
       </div>
       <div class="condition-card" data-reveal>
-        <h4><span class="condition-dot" style="background:#fbbf24"></span>Glaucoma Suspect</h4>
-        <p>Borderline C/D · RNFL wedge defect</p>
+        <h4><span class="condition-dot" style="background:#f87171"></span>Artery Occlusion</h4>
+        <p>Cherry-red spot · Ischemic whitening · Retinal pallor</p>
       </div>
       <div class="condition-card" data-reveal>
-        <h4><span class="condition-dot" style="background:#34d399"></span>Optic Disc Drusen</h4>
-        <p>Buried drusen · Anomalous elevation</p>
+        <h4><span class="condition-dot" style="background:#fb923c"></span>Inflammatory/Vasculitic</h4>
+        <p>Perivascular sheathing · Retinal vasculitis · Vitreous cells</p>
       </div>
       <div class="condition-card" data-reveal>
-        <h4><span class="condition-dot" style="background:#fb923c"></span>Epiretinal Membrane</h4>
-        <p>Wrinkling of inner retinal surface · Distortion</p>
+        <h4><span class="condition-dot" style="background:#fbbf24"></span>Other Pathology</h4>
+        <p>Epiretinal membrane · Disc drusen · Myopic degeneration</p>
       </div>
       <div class="condition-card" data-reveal>
-        <h4><span class="condition-dot" style="background:#f87171"></span>Central Retinal Artery Occlusion</h4>
-        <p>Cherry red spot · Ischemic whitening</p>
+        <h4><span class="condition-dot" style="background:#34d399"></span>No Clear Disease</h4>
+        <p>Normal variant · Artifact · Inconclusive imaging</p>
       </div>
     </div>
   </div>
@@ -1884,43 +1885,76 @@ section { padding: 100px 0; }
     </div>
     <div class="case-mockup" data-reveal>
       <div class="case-tabs">
-        <div class="case-tab active">Case Library</div>
-        <div class="case-tab">Flashcards</div>
-        <div class="case-tab">Finding Guide</div>
+        <div class="case-tab active">All Cases</div>
+        <div class="case-tab">Beginner</div>
+        <div class="case-tab">Intermediate</div>
+        <div class="case-tab">Advanced</div>
       </div>
-      <input type="text" class="case-search" placeholder="Search by condition, finding, or keyword..." readonly>
-      <div class="case-stat-line">50 fundus images loaded</div>
+      <input type="text" class="case-search" placeholder="Search by condition, finding, or biomarker..." readonly>
+      <div class="case-stat-line">50 authenticated fundus photographs · 10 conditions · 3 difficulty levels</div>
       <div class="case-cards-grid">
         <div class="case-card">
-          <div class="case-fundus"></div>
+          <div class="case-fundus" data-case-id="HLT_BEG_001" role="img" aria-label="Healthy fundus photograph"></div>
           <div>
             <span class="case-difficulty beginner">Beginner</span>
-            <div class="case-condition">Healthy</div>
-            <div class="case-finding">Normal cup-to-disc ratio (~0.3)</div>
+            <div class="case-condition">Healthy Fundus</div>
+            <div class="case-finding">Normal cup-to-disc ratio (~0.3) · Clear foveal reflex · Pink retina</div>
           </div>
         </div>
         <div class="case-card">
-          <div class="case-fundus"></div>
+          <div class="case-fundus" data-case-id="DR_BEG_001" role="img" aria-label="Early diabetic retinopathy fundus photograph"></div>
           <div>
             <span class="case-difficulty beginner">Beginner</span>
-            <div class="case-condition">Glaucoma</div>
-            <div class="case-finding">Enlarged cup-to-disc ratio · Disc pallor</div>
+            <div class="case-condition">Early Diabetic Retinopathy</div>
+            <div class="case-finding">2-3 microaneurysms · No macular edema</div>
           </div>
         </div>
         <div class="case-card">
-          <div class="case-fundus"></div>
+          <div class="case-fundus" data-case-id="DR_INT_003" role="img" aria-label="Moderate diabetic retinopathy fundus photograph"></div>
           <div>
             <span class="case-difficulty intermediate">Intermediate</span>
-            <div class="case-condition">Diabetic Retinopathy</div>
-            <div class="case-finding">Hard exudates · Dot-blot hemorrhages</div>
+            <div class="case-condition">Moderate Diabetic Retinopathy</div>
+            <div class="case-finding">Hard exudates · Dot-blot hemorrhages · Perimacular lipid</div>
           </div>
         </div>
         <div class="case-card">
-          <div class="case-fundus"></div>
+          <div class="case-fundus" data-case-id="GLC_INT_002" role="img" aria-label="Glaucoma suspect fundus photograph"></div>
           <div>
-            <span class="case-difficulty beginner">Beginner</span>
-            <div class="case-condition">Glaucoma</div>
-            <div class="case-finding">Notching of neuroretinal rim</div>
+            <span class="case-difficulty intermediate">Intermediate</span>
+            <div class="case-condition">Glaucoma Suspect</div>
+            <div class="case-finding">Vertical cupping (C/D 0.7) · Rim thinning · RNFL wedge defect</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-fundus" data-case-id="HTN_INT_001" role="img" aria-label="Hypertensive retinopathy fundus photograph"></div>
+          <div>
+            <span class="case-difficulty intermediate">Intermediate</span>
+            <div class="case-condition">Hypertensive Retinopathy</div>
+            <div class="case-finding">AV nicking · Arteriolar narrowing · Flame hemorrhages</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-fundus" data-case-id="AMD_INT_004" role="img" aria-label="Age-related macular degeneration fundus photograph"></div>
+          <div>
+            <span class="case-difficulty intermediate">Intermediate</span>
+            <div class="case-condition">Age-Related Macular Degeneration</div>
+            <div class="case-finding">Drusen deposits · Pigmentary changes · Early atrophy</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-fundus" data-case-id="PDR_ADV_001" role="img" aria-label="Proliferative diabetic retinopathy fundus photograph"></div>
+          <div>
+            <span class="case-difficulty advanced">Advanced</span>
+            <div class="case-condition">Proliferative Diabetic Retinopathy</div>
+            <div class="case-finding">Neovascularization · IRMA · Vitreous hemorrhage</div>
+          </div>
+        </div>
+        <div class="case-card">
+          <div class="case-fundus" data-case-id="RVO_ADV_002" role="img" aria-label="Retinal vein occlusion fundus photograph"></div>
+          <div>
+            <span class="case-difficulty advanced">Advanced</span>
+            <div class="case-condition">Retinal Vein Occlusion</div>
+            <div class="case-finding">Flame hemorrhages · Cotton-wool spots · Dilated tortuous veins</div>
           </div>
         </div>
       </div>

@@ -2168,6 +2168,7 @@ section { padding: 100px 0; }
   gap: 4px;
 }
 .challenge-result-cta:hover { text-decoration: underline; }
+.challenge-answered { pointer-events: none; opacity: 0.7; }
 
 /* ── Mobile refinements for split hero ── */
 @media (max-width: 1023px) {
@@ -3396,8 +3397,12 @@ section { padding: 100px 0; }
   challengeCheckBtn.addEventListener('click', function() {
     if (!selectedAnswer) return;
     challengeActions.style.display = 'none';
-    document.getElementById('challengeOptions').style.pointerEvents = 'none';
-    if (selectedAnswer === 'correct') {
+    var optionsContainer = document.getElementById('challengeOptions');
+    optionsContainer.classList.add('challenge-answered');
+    selectedAnswer = null; /* reset to prevent re-interaction */
+    var selected = optionsContainer.querySelector('.challenge-option.selected');
+    var isCorrect = selected && selected.getAttribute('data-answer') === 'correct';
+    if (isCorrect) {
       challengeResultBadge.className = 'challenge-result-badge correct';
       challengeResultBadge.innerHTML = '&#10003; Correct!';
       challengeResultText.textContent = 'Microaneurysms and hard exudates in the macula indicate Diabetic Retinopathy. AI confidence: 87%. Nice work!';

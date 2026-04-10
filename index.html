@@ -735,6 +735,91 @@ section { padding: 100px 0; }
 
 .condition-card p { font-size: 12px; color: var(--text-fine); line-height: 1.5; }
 
+/* ───── CONDITION DETAILS ───── */
+.condition-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.condition-detail-card {
+  background: rgba(15,23,42,0.6);
+  border: 1px solid var(--border-default);
+  border-radius: 16px;
+  padding: 28px;
+  transition: border-color 0.2s;
+}
+
+.condition-detail-card:hover {
+  border-color: var(--border-hover);
+}
+
+.condition-detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.condition-detail-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.condition-detail-card h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.condition-detail-card .prevalence {
+  font-size: 12px;
+  color: var(--text-fine);
+  margin-bottom: 12px;
+}
+
+.condition-detail-card .clinical-signs {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.condition-detail-card .clinical-signs strong {
+  color: var(--text-secondary);
+}
+
+.condition-detail-card .biomarkers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.biomarker-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  color: var(--teal);
+  background: rgba(45,212,191,0.08);
+}
+
+.condition-detail-card .case-count {
+  font-size: 12px;
+  color: var(--text-fine);
+  border-top: 1px solid var(--border-default);
+  padding-top: 12px;
+}
+
+@media (max-width: 768px) {
+  .condition-details { grid-template-columns: 1fr; }
+}
+
 /* ───── CASE LIBRARY MOCKUP ───── */
 .case-mockup {
   background: rgba(15,23,42,0.8);
@@ -1619,7 +1704,7 @@ section { padding: 100px 0; }
 
 <!-- ═══════ SOCIAL PROOF ═══════ -->
 <div class="social-proof" id="socialProof">
-  <div class="social-proof-label">Used by students at</div>
+  <div class="social-proof-label">Designed for students &amp; trainees at</div>
   <div class="social-proof-logos">
     <span class="social-proof-logo">University of Guelph</span>
     <span class="social-proof-sep"></span>
@@ -1791,7 +1876,7 @@ section { padding: 100px 0; }
           </div>
           <div class="step-badge c1">01</div>
           <h3>Choose a Case</h3>
-          <p>Browse 50 real fundus images across 10 conditions. Filter by difficulty level — Beginner, Intermediate, or Advanced. Each case includes the original image, AI-generated teaching notes, and key findings to identify.</p>
+          <p>Browse 50 authenticated clinical fundus photographs across 10 conditions. Filter by difficulty — Beginner, Intermediate, or Advanced. Each case includes the high-resolution fundus image, AI-generated teaching notes, and key biomarkers to identify.</p>
         </div>
         <div class="step-card step-2 tilt-card" data-reveal>
           <div class="step-icon-visual c2">
@@ -1871,6 +1956,202 @@ section { padding: 100px 0; }
       <div class="condition-card" data-reveal>
         <h4><span class="condition-dot" style="background:#34d399"></span>No Clear Disease</h4>
         <p>Normal variant · Artifact · Inconclusive imaging</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ═══════ 7b. CONDITION DETAILS ═══════ -->
+<section id="condition-details">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="section-label blue">CLINICAL REFERENCE</div>
+      <h2 class="section-heading">Condition Reference Guide</h2>
+      <p class="section-sub centered">Clinical descriptions, key signs, and AI-detectable biomarkers for each condition in the dataset.</p>
+    </div>
+    <div class="condition-details">
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#34d399"></span>
+          <h3>Healthy Fundus</h3>
+        </div>
+        <div class="prevalence">Baseline reference — normal retinal anatomy</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Normal cup-to-disc ratio (0.2–0.4), clear foveal reflex, pink retina, normal vascular caliber, no arteriovenous nicking, symmetric optic discs.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Normal C/D ratio</span>
+          <span class="biomarker-tag">Clear fovea</span>
+          <span class="biomarker-tag">Normal vessels</span>
+        </div>
+        <div class="case-count">5 cases available: 5 Beginner</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#f87171"></span>
+          <h3>Diabetic Retinopathy</h3>
+        </div>
+        <div class="prevalence">~34% of people with diabetes develop DR · Leading cause of blindness in working-age adults</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Microaneurysms (small red dots), dot-blot hemorrhages, flame hemorrhages, hard exudates (yellow lipid deposits), cotton-wool spots, venous beading, intraretinal microvascular abnormalities (IRMA), neovascularization (proliferative stage).<br>
+          <strong>Progression:</strong> Mild NPDR → Moderate NPDR → Severe NPDR → Proliferative DR.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Microaneurysms</span>
+          <span class="biomarker-tag">Hard exudates</span>
+          <span class="biomarker-tag">Hemorrhages</span>
+          <span class="biomarker-tag">Neovascularization</span>
+          <span class="biomarker-tag">IRMA</span>
+        </div>
+        <div class="case-count">12 cases available: 4 Beginner · 5 Intermediate · 3 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#fbbf24"></span>
+          <h3>Glaucoma</h3>
+        </div>
+        <div class="prevalence">~3% of adults over 40 · Second leading cause of irreversible blindness worldwide</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Enlarged cup-to-disc ratio (vertical cupping), neuroretinal rim thinning, RNFL wedge defects, disc hemorrhages (Drance hemorrhage), peripapillary atrophy (beta zone), asymmetric C/D ratio between eyes.<br>
+          <strong>Progression:</strong> Glaucoma suspect → Early → Moderate → Advanced (near-total cupping).
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Vertical cupping</span>
+          <span class="biomarker-tag">Rim thinning</span>
+          <span class="biomarker-tag">RNFL defect</span>
+          <span class="biomarker-tag">Disc hemorrhage</span>
+        </div>
+        <div class="case-count">9 cases available: 3 Beginner · 4 Intermediate · 2 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#fbbf24"></span>
+          <h3>Hypertensive Retinopathy</h3>
+        </div>
+        <div class="prevalence">~2–17% of non-diabetic adults · Reflects systemic vascular disease</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Generalized arteriolar narrowing, focal arteriolar constriction, arteriovenous (AV) nicking, copper/silver-wire arterioles, flame hemorrhages, cotton-wool spots, optic disc edema (malignant hypertension).<br>
+          <strong>Grading:</strong> Keith-Wagener-Barker Grade 1 → 2 → 3 → 4.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">AV nicking</span>
+          <span class="biomarker-tag">Arteriolar narrowing</span>
+          <span class="biomarker-tag">Flame hemorrhages</span>
+          <span class="biomarker-tag">Cotton-wool spots</span>
+        </div>
+        <div class="case-count">6 cases available: 2 Beginner · 3 Intermediate · 1 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#fb923c"></span>
+          <h3>Age-Related Macular Degeneration</h3>
+        </div>
+        <div class="prevalence">~11% of adults over 65 · Leading cause of central vision loss in older adults</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Drusen deposits (small yellow deposits), retinal pigment epithelial (RPE) changes, geographic atrophy (dry AMD), choroidal neovascularization and subretinal fluid (wet AMD), disciform scar (end-stage).<br>
+          <strong>Progression:</strong> Early (small drusen) → Intermediate (large drusen, pigment changes) → Advanced (geographic atrophy or neovascular AMD).
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Drusen</span>
+          <span class="biomarker-tag">RPE changes</span>
+          <span class="biomarker-tag">Geographic atrophy</span>
+          <span class="biomarker-tag">CNV</span>
+        </div>
+        <div class="case-count">7 cases available: 2 Beginner · 3 Intermediate · 2 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#f87171"></span>
+          <h3>Retinal Vein Occlusion</h3>
+        </div>
+        <div class="prevalence">~0.5–2% of adults over 40 · Second most common retinal vascular disease</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Flame-shaped and dot-blot hemorrhages (sectoral in BRVO, all quadrants in CRVO), cotton-wool spots, dilated tortuous veins, disc edema, macular edema, retinal ischemia.<br>
+          <strong>Types:</strong> Branch RVO (BRVO) · Central RVO (CRVO) · Hemi-retinal VO.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Flame hemorrhages</span>
+          <span class="biomarker-tag">Dilated veins</span>
+          <span class="biomarker-tag">Cotton-wool spots</span>
+          <span class="biomarker-tag">Disc edema</span>
+        </div>
+        <div class="case-count">5 cases available: 1 Beginner · 2 Intermediate · 2 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#f87171"></span>
+          <h3>Artery Occlusion</h3>
+        </div>
+        <div class="prevalence">~1 in 10,000 · Ophthalmologic emergency requiring urgent workup</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Cherry-red spot at the fovea (CRAO), ischemic retinal whitening/pallor, box-carring of blood column in arterioles, attenuated arterioles, cotton-wool spots, sectoral pallor in BRAO.<br>
+          <strong>Types:</strong> Central RAO (CRAO) · Branch RAO (BRAO) · Ophthalmic artery occlusion.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Cherry-red spot</span>
+          <span class="biomarker-tag">Retinal pallor</span>
+          <span class="biomarker-tag">Arteriolar attenuation</span>
+        </div>
+        <div class="case-count">4 cases available: 1 Beginner · 1 Intermediate · 2 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#fb923c"></span>
+          <h3>Inflammatory / Vasculitic</h3>
+        </div>
+        <div class="prevalence">Variable prevalence · Associated with systemic autoimmune conditions</div>
+        <div class="clinical-signs">
+          <strong>Key signs:</strong> Perivascular sheathing (candle-wax drippings), retinal vasculitis, vitreous cells and haze, disc edema, macular edema, retinal infiltrates, peripheral retinal ischemia.<br>
+          <strong>Associations:</strong> Sarcoidosis, Behçet disease, lupus, multiple sclerosis, tuberculosis.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Perivascular sheathing</span>
+          <span class="biomarker-tag">Vasculitis</span>
+          <span class="biomarker-tag">Vitreous cells</span>
+        </div>
+        <div class="case-count">3 cases available: 1 Beginner · 1 Intermediate · 1 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#fb923c"></span>
+          <h3>Other Pathology</h3>
+        </div>
+        <div class="prevalence">Miscellaneous conditions not in primary categories</div>
+        <div class="clinical-signs">
+          <strong>Includes:</strong> Epiretinal membrane (wrinkling of inner retina), optic disc drusen (buried drusen, anomalous elevation), myopic degeneration, macular hole, retinal detachment signs, and other uncommon conditions.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">ERM</span>
+          <span class="biomarker-tag">Disc drusen</span>
+          <span class="biomarker-tag">Myopic changes</span>
+        </div>
+        <div class="case-count">3 cases available: 1 Beginner · 1 Intermediate · 1 Advanced</div>
+      </div>
+
+      <div class="condition-detail-card" data-reveal>
+        <div class="condition-detail-header">
+          <span class="condition-detail-dot" style="background:#34d399"></span>
+          <h3>No Clear Disease</h3>
+        </div>
+        <div class="prevalence">Diagnostic specificity training — challenging normal variants</div>
+        <div class="clinical-signs">
+          <strong>Purpose:</strong> Cases with normal fundus appearance, imaging artifacts, or inconclusive findings. Essential for calibrating diagnostic specificity — not every fundus has pathology. Teaches students to avoid false-positive diagnoses.
+        </div>
+        <div class="biomarkers">
+          <span class="biomarker-tag">Normal variant</span>
+          <span class="biomarker-tag">Artifact recognition</span>
+        </div>
+        <div class="case-count">1 case available: 1 Advanced</div>
       </div>
     </div>
   </div>

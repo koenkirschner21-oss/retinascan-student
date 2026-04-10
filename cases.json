@@ -1,0 +1,452 @@
+{
+  "dataset": {
+    "name": "RetinaScan Clinical Fundus Dataset",
+    "version": "1.0.0",
+    "total_images": 50,
+    "conditions": 10,
+    "source_datasets": ["RFMID", "APTOS"],
+    "total_size_gb": 3.6,
+    "model": {
+      "architecture": "EfficientNetB0",
+      "validation_accuracy": 0.778,
+      "training_images": 16000,
+      "explainability": ["Grad-CAM", "SHAP"]
+    }
+  },
+  "conditions": [
+    {
+      "id": "healthy",
+      "name": "Healthy Fundus",
+      "cases_beginner": 5,
+      "cases_intermediate": 0,
+      "cases_advanced": 0
+    },
+    {
+      "id": "diabetic_retinopathy",
+      "name": "Diabetic Retinopathy",
+      "cases_beginner": 4,
+      "cases_intermediate": 5,
+      "cases_advanced": 3
+    },
+    {
+      "id": "glaucoma",
+      "name": "Glaucoma",
+      "cases_beginner": 3,
+      "cases_intermediate": 4,
+      "cases_advanced": 2
+    },
+    {
+      "id": "hypertensive_retinopathy",
+      "name": "Hypertensive Retinopathy",
+      "cases_beginner": 2,
+      "cases_intermediate": 3,
+      "cases_advanced": 1
+    },
+    {
+      "id": "amd",
+      "name": "Age-Related Macular Degeneration",
+      "cases_beginner": 2,
+      "cases_intermediate": 3,
+      "cases_advanced": 2
+    },
+    {
+      "id": "retinal_vein_occlusion",
+      "name": "Retinal Vein Occlusion",
+      "cases_beginner": 1,
+      "cases_intermediate": 2,
+      "cases_advanced": 2
+    },
+    {
+      "id": "artery_occlusion",
+      "name": "Artery Occlusion",
+      "cases_beginner": 1,
+      "cases_intermediate": 1,
+      "cases_advanced": 2
+    },
+    {
+      "id": "inflammatory_vasculitic",
+      "name": "Inflammatory/Vasculitic",
+      "cases_beginner": 1,
+      "cases_intermediate": 1,
+      "cases_advanced": 1
+    },
+    {
+      "id": "other_pathology",
+      "name": "Other Pathology",
+      "cases_beginner": 1,
+      "cases_intermediate": 1,
+      "cases_advanced": 1
+    },
+    {
+      "id": "no_clear_disease",
+      "name": "No Clear Disease",
+      "cases_beginner": 0,
+      "cases_intermediate": 0,
+      "cases_advanced": 1
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "HLT_BEG_001",
+      "image_path": "images/healthy/beginner/case_001.jpg",
+      "condition": "Healthy Fundus",
+      "difficulty": "beginner",
+      "key_findings": ["normal_cup_to_disc_ratio", "clear_foveal_reflex", "pink_retina"],
+      "biomarkers_present": [],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256]
+      },
+      "clinical_notes": "Normal healthy fundus. Cup-to-disc ratio approximately 0.3. Clear foveal reflex present. Normal retinal vasculature with no tortuosity.",
+      "age_range": "25-35",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "HLT_BEG_002",
+      "image_path": "images/healthy/beginner/case_002.jpg",
+      "condition": "Healthy Fundus",
+      "difficulty": "beginner",
+      "key_findings": ["normal_vessels", "clear_media", "symmetric_discs"],
+      "biomarkers_present": [],
+      "approximate_coords": {
+        "optic_disc": [375, 250],
+        "macula": [250, 250]
+      },
+      "clinical_notes": "Healthy fundus with normal vascular caliber. No arteriovenous nicking. Symmetric optic disc appearance.",
+      "age_range": "30-40",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "DR_BEG_001",
+      "image_path": "images/diabetic_retinopathy/beginner/case_001.jpg",
+      "condition": "Diabetic Retinopathy",
+      "difficulty": "beginner",
+      "key_findings": ["microaneurysms"],
+      "biomarkers_present": ["retinal_microaneurysm"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [290, 240]
+      },
+      "clinical_notes": "Mild non-proliferative diabetic retinopathy with 2-3 microaneurysms in the temporal macula. No macular edema.",
+      "age_range": "45-55",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "DR_BEG_002",
+      "image_path": "images/diabetic_retinopathy/beginner/case_002.jpg",
+      "condition": "Diabetic Retinopathy",
+      "difficulty": "beginner",
+      "key_findings": ["microaneurysms", "dot_hemorrhages"],
+      "biomarkers_present": ["retinal_microaneurysm", "retinal_hemorrhage"],
+      "approximate_coords": {
+        "optic_disc": [370, 260],
+        "macula": [250, 260],
+        "key_finding_1": [280, 250]
+      },
+      "clinical_notes": "Mild NPDR with scattered microaneurysms and 1-2 dot hemorrhages. No exudates present.",
+      "age_range": "50-60",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "DR_INT_001",
+      "image_path": "images/diabetic_retinopathy/intermediate/case_001.jpg",
+      "condition": "Diabetic Retinopathy",
+      "difficulty": "intermediate",
+      "key_findings": ["hard_exudates", "dot_blot_hemorrhages", "microaneurysms"],
+      "biomarkers_present": ["retinal_hemorrhage", "lipid_exudate", "retinal_microaneurysm"],
+      "approximate_coords": {
+        "optic_disc": [385, 255],
+        "macula": [255, 255],
+        "key_finding_1": [270, 260],
+        "key_finding_2": [240, 230]
+      },
+      "clinical_notes": "Moderate non-proliferative DR with circinate hard exudates near the macula and scattered dot-blot hemorrhages.",
+      "age_range": "55-65",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "DR_INT_003",
+      "image_path": "images/diabetic_retinopathy/intermediate/case_003.jpg",
+      "condition": "Diabetic Retinopathy",
+      "difficulty": "intermediate",
+      "key_findings": ["microaneurysms", "hard_exudates", "flame_hemorrhages"],
+      "biomarkers_present": ["retinal_hemorrhage", "lipid_exudate"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [300, 280]
+      },
+      "clinical_notes": "Moderate non-proliferative DR with perimacula hard exudates and flame hemorrhages in the superior arcade.",
+      "age_range": "55-65",
+      "imaging_modality": "Optos 35°"
+    },
+    {
+      "case_id": "PDR_ADV_001",
+      "image_path": "images/diabetic_retinopathy/advanced/case_001.jpg",
+      "condition": "Diabetic Retinopathy",
+      "difficulty": "advanced",
+      "key_findings": ["neovascularization", "IRMA", "vitreous_hemorrhage"],
+      "biomarkers_present": ["neovascularization_disc", "neovascularization_elsewhere", "intraretinal_microvascular_abnormality"],
+      "approximate_coords": {
+        "optic_disc": [380, 255],
+        "macula": [255, 255],
+        "key_finding_1": [370, 240],
+        "key_finding_2": [300, 200]
+      },
+      "clinical_notes": "Severe proliferative diabetic retinopathy with neovascularization at the disc (NVD) and neovascularization elsewhere (NVE). IRMA present in all quadrants.",
+      "age_range": "50-65",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "GLC_BEG_001",
+      "image_path": "images/glaucoma/beginner/case_001.jpg",
+      "condition": "Glaucoma",
+      "difficulty": "beginner",
+      "key_findings": ["enlarged_cup_to_disc_ratio", "disc_pallor"],
+      "biomarkers_present": ["optic_disc_cupping"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256]
+      },
+      "clinical_notes": "Open-angle glaucoma with enlarged cup-to-disc ratio (0.7). Disc pallor noted. RNFL appears thinned inferiorly.",
+      "age_range": "60-70",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "GLC_INT_002",
+      "image_path": "images/glaucoma/intermediate/case_002.jpg",
+      "condition": "Glaucoma",
+      "difficulty": "intermediate",
+      "key_findings": ["vertical_cupping", "rim_thinning", "RNFL_wedge_defect"],
+      "biomarkers_present": ["optic_disc_cupping", "nerve_fiber_layer_defect"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [380, 256]
+      },
+      "clinical_notes": "Moderate glaucoma with vertical cupping (C/D 0.75). Inferior rim thinning with corresponding RNFL wedge defect. No disc hemorrhage.",
+      "age_range": "55-65",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "GLC_ADV_001",
+      "image_path": "images/glaucoma/advanced/case_001.jpg",
+      "condition": "Glaucoma",
+      "difficulty": "advanced",
+      "key_findings": ["advanced_cupping", "disc_hemorrhage", "peripapillary_atrophy"],
+      "biomarkers_present": ["optic_disc_cupping", "disc_hemorrhage", "peripapillary_atrophy"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [385, 270]
+      },
+      "clinical_notes": "Advanced glaucoma with C/D ratio 0.9. Disc hemorrhage at 7 o'clock. Extensive peripapillary atrophy (beta zone). Near-total rim loss inferiorly.",
+      "age_range": "65-75",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "HTN_BEG_001",
+      "image_path": "images/hypertensive_retinopathy/beginner/case_001.jpg",
+      "condition": "Hypertensive Retinopathy",
+      "difficulty": "beginner",
+      "key_findings": ["arteriolar_narrowing", "mild_av_nicking"],
+      "biomarkers_present": ["arteriolar_narrowing"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [320, 240]
+      },
+      "clinical_notes": "Mild hypertensive retinopathy (Grade 1-2). Generalized arteriolar narrowing with subtle AV nicking.",
+      "age_range": "55-65",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "HTN_INT_001",
+      "image_path": "images/hypertensive_retinopathy/intermediate/case_001.jpg",
+      "condition": "Hypertensive Retinopathy",
+      "difficulty": "intermediate",
+      "key_findings": ["av_nicking", "arteriolar_narrowing", "flame_hemorrhages"],
+      "biomarkers_present": ["arteriolar_narrowing", "arteriovenous_nicking", "retinal_hemorrhage"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [340, 230],
+        "key_finding_2": [300, 280]
+      },
+      "clinical_notes": "Moderate hypertensive retinopathy (Grade 3). AV nicking with copper-wire arterioles and scattered flame hemorrhages.",
+      "age_range": "60-70",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "AMD_BEG_001",
+      "image_path": "images/amd/beginner/case_001.jpg",
+      "condition": "Age-Related Macular Degeneration",
+      "difficulty": "beginner",
+      "key_findings": ["drusen", "macular_pigment_changes"],
+      "biomarkers_present": ["drusen"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [256, 256]
+      },
+      "clinical_notes": "Early dry AMD with scattered small-to-intermediate drusen in the macular region. No pigmentary changes.",
+      "age_range": "65-75",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "AMD_INT_004",
+      "image_path": "images/amd/intermediate/case_004.jpg",
+      "condition": "Age-Related Macular Degeneration",
+      "difficulty": "intermediate",
+      "key_findings": ["drusen_deposits", "pigmentary_changes", "early_atrophy"],
+      "biomarkers_present": ["drusen", "pigment_epithelial_changes", "geographic_atrophy"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [260, 250],
+        "key_finding_2": [245, 265]
+      },
+      "clinical_notes": "Intermediate AMD with confluent drusen, RPE pigmentary changes, and early geographic atrophy. High risk of progression.",
+      "age_range": "70-80",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "RVO_INT_001",
+      "image_path": "images/retinal_vein_occlusion/intermediate/case_001.jpg",
+      "condition": "Retinal Vein Occlusion",
+      "difficulty": "intermediate",
+      "key_findings": ["flame_hemorrhages", "cotton_wool_spots", "dilated_veins"],
+      "biomarkers_present": ["retinal_hemorrhage", "cotton_wool_spots", "venous_dilation"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [340, 200],
+        "key_finding_2": [300, 300]
+      },
+      "clinical_notes": "Branch retinal vein occlusion (BRVO) affecting the superior temporal quadrant. Flame hemorrhages, cotton-wool spots, and dilated tortuous veins.",
+      "age_range": "60-70",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "RVO_ADV_002",
+      "image_path": "images/retinal_vein_occlusion/advanced/case_002.jpg",
+      "condition": "Retinal Vein Occlusion",
+      "difficulty": "advanced",
+      "key_findings": ["extensive_hemorrhages", "disc_edema", "macular_edema"],
+      "biomarkers_present": ["retinal_hemorrhage", "disc_edema", "macular_edema", "cotton_wool_spots"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [380, 256],
+        "key_finding_2": [256, 256]
+      },
+      "clinical_notes": "Central retinal vein occlusion (CRVO) with extensive flame and dot-blot hemorrhages in all quadrants. Disc edema and probable macular edema.",
+      "age_range": "55-65",
+      "imaging_modality": "45° fundus camera"
+    },
+    {
+      "case_id": "ART_ADV_001",
+      "image_path": "images/artery_occlusion/advanced/case_001.jpg",
+      "condition": "Artery Occlusion",
+      "difficulty": "advanced",
+      "key_findings": ["cherry_red_spot", "ischemic_whitening", "retinal_pallor"],
+      "biomarkers_present": ["cherry_red_spot", "retinal_ischemia"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [256, 256]
+      },
+      "clinical_notes": "Central retinal artery occlusion (CRAO) with classic cherry-red spot at the fovea and diffuse retinal pallor from ischemic whitening.",
+      "age_range": "70-80",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "INF_INT_001",
+      "image_path": "images/inflammatory_vasculitic/intermediate/case_001.jpg",
+      "condition": "Inflammatory/Vasculitic",
+      "difficulty": "intermediate",
+      "key_findings": ["perivascular_sheathing", "retinal_vasculitis"],
+      "biomarkers_present": ["perivascular_sheathing", "retinal_inflammation"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [320, 230]
+      },
+      "clinical_notes": "Retinal vasculitis with perivascular sheathing along the superior temporal arcade. Mild vitreous haze.",
+      "age_range": "35-45",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "OTH_INT_001",
+      "image_path": "images/other_pathology/intermediate/case_001.jpg",
+      "condition": "Other Pathology",
+      "difficulty": "intermediate",
+      "key_findings": ["epiretinal_membrane", "macular_distortion"],
+      "biomarkers_present": ["epiretinal_membrane"],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256],
+        "key_finding_1": [256, 256]
+      },
+      "clinical_notes": "Epiretinal membrane with cellophane-like wrinkling of the inner retinal surface and mild macular distortion.",
+      "age_range": "65-75",
+      "imaging_modality": "35° fundus camera"
+    },
+    {
+      "case_id": "NCD_ADV_001",
+      "image_path": "images/no_clear_disease/advanced/case_001.jpg",
+      "condition": "No Clear Disease",
+      "difficulty": "advanced",
+      "key_findings": ["normal_variant", "imaging_artifact"],
+      "biomarkers_present": [],
+      "approximate_coords": {
+        "optic_disc": [380, 256],
+        "macula": [256, 256]
+      },
+      "clinical_notes": "Fundus image with normal variant appearance that may be mistaken for pathology. Useful for calibrating diagnostic specificity.",
+      "age_range": "40-50",
+      "imaging_modality": "35° fundus camera"
+    }
+  ],
+  "image_standards": {
+    "minimum_resolution": "512x512px",
+    "preferred_resolution": "1024x1024px",
+    "field_of_view": "35-45°",
+    "format": "JPEG",
+    "quality": "High — no over-compression or pixelation",
+    "pii_removed": true,
+    "annotation_overlay_opacity": 0.4
+  },
+  "folder_structure": {
+    "description": "Organize the 3.6GB dataset into this folder structure",
+    "structure": [
+      "images/healthy/beginner/",
+      "images/diabetic_retinopathy/beginner/",
+      "images/diabetic_retinopathy/intermediate/",
+      "images/diabetic_retinopathy/advanced/",
+      "images/glaucoma/beginner/",
+      "images/glaucoma/intermediate/",
+      "images/glaucoma/advanced/",
+      "images/hypertensive_retinopathy/beginner/",
+      "images/hypertensive_retinopathy/intermediate/",
+      "images/hypertensive_retinopathy/advanced/",
+      "images/amd/beginner/",
+      "images/amd/intermediate/",
+      "images/amd/advanced/",
+      "images/retinal_vein_occlusion/beginner/",
+      "images/retinal_vein_occlusion/intermediate/",
+      "images/retinal_vein_occlusion/advanced/",
+      "images/artery_occlusion/beginner/",
+      "images/artery_occlusion/intermediate/",
+      "images/artery_occlusion/advanced/",
+      "images/inflammatory_vasculitic/beginner/",
+      "images/inflammatory_vasculitic/intermediate/",
+      "images/inflammatory_vasculitic/advanced/",
+      "images/other_pathology/beginner/",
+      "images/other_pathology/intermediate/",
+      "images/other_pathology/advanced/",
+      "images/no_clear_disease/advanced/"
+    ]
+  }
+}

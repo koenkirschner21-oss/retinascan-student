@@ -2014,7 +2014,7 @@ section { padding: 100px 0; }
     <div class="hero-content">
       <div class="hero-eyebrow" data-reveal>
         <span class="eyebrow-dot"></span>
-        AI-POWERED DIAGNOSTIC TRAINING
+        AI-POWERED RETINAL DIAGNOSTIC TRAINING
       </div>
       <h1 data-reveal aria-label="Stop Guessing. Start Diagnosing.">
         <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Stop Guessing.</span></span>
@@ -3110,7 +3110,7 @@ section { padding: 100px 0; }
     }
   });
   function updateActiveNav() {
-    var NAV_OFFSET = 120; /* accounts for fixed nav height + buffer */
+    var NAV_OFFSET = 120; /* nav height (64px) + scroll buffer (56px) for accurate section highlighting */
     var scrollPos = window.pageYOffset + NAV_OFFSET;
     var found = false;
     for (var i = navSections.length - 1; i >= 0; i--) {

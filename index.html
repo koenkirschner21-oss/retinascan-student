@@ -130,14 +130,15 @@ section { padding: 100px 0; }
   margin-left: 4px;
 }
 
-.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
 
 .nav-links a {
   font-size: 14px;
   color: var(--text-muted);
-  transition: color 0.2s;
+  transition: color 0.2s, letter-spacing 0.2s;
   padding: 4px 0;
   position: relative;
+  letter-spacing: 0;
 }
 .nav-links a::after {
   content: '';
@@ -147,9 +148,9 @@ section { padding: 100px 0; }
   width: 0;
   height: 1.5px;
   background: var(--teal);
-  transition: width 0.25s ease;
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.nav-links a:hover { color: #ffffff; }
+.nav-links a:hover { color: #ffffff; letter-spacing: 0.01em; }
 .nav-links a:hover::after { width: 100%; }
 .nav-links a.active { color: #ffffff; }
 .nav-links a.active::after { width: 100%; }
@@ -162,9 +163,9 @@ section { padding: 100px 0; }
   border: 1px solid var(--border-hover);
   border-radius: 10px;
   padding: 8px 18px;
-  transition: color 0.2s, border-color 0.2s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 }
-.btn-ghost:hover { color: #ffffff; border-color: rgba(51,65,85,0.7); }
+.btn-ghost:hover { color: #ffffff; border-color: rgba(51,65,85,0.7); background: rgba(255,255,255,0.03); }
 
 .btn-cta {
   font-size: 14px;
@@ -1922,9 +1923,255 @@ section { padding: 100px 0; }
   position: relative;
 }
 
+/* ── Interactive Hero Challenge ── */
+.hero-challenge {
+  background: rgba(15,23,42,0.92);
+  border: 1px solid rgba(45,212,191,0.18);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 80px rgba(0,0,0,0.45),
+    0 0 60px rgba(45,212,191,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.challenge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-default);
+}
+.challenge-case-id {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+}
+.challenge-timer {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-fine);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.challenge-timer-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: blink 1.5s infinite;
+}
+
+.challenge-fundus-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: 32px;
+  background: rgba(0,0,0,0.3);
+}
+.challenge-fundus {
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 45% 45%, #8B4513 0%, #5a2d0c 30%, #3d1a06 60%, #1a0a02 100%);
+  position: relative;
+  box-shadow: 0 0 40px rgba(139,69,19,0.25);
+}
+.challenge-fundus::after {
+  content: '';
+  position: absolute;
+  width: 28%; height: 28%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5d5a0 0%, #d4a76a 60%, #b8864a 100%);
+  top: 40%; left: 55%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+}
+.challenge-fundus::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 60% 50%, rgba(45,212,191,0.15) 0%, rgba(45,212,191,0.05) 40%, transparent 70%);
+  z-index: 1;
+}
+
+/* AI detection markers */
+.ai-marker {
+  position: absolute;
+  border: 1.5px solid rgba(45,212,191,0.6);
+  border-radius: 50%;
+  z-index: 2;
+  animation: markerPulse 2.5s ease-in-out infinite;
+}
+.ai-marker::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(45,212,191,0.2);
+}
+.ai-marker-1 { width: 32px; height: 32px; top: 22%; left: 30%; animation-delay: 0s; }
+.ai-marker-2 { width: 24px; height: 24px; top: 55%; left: 65%; animation-delay: 0.8s; }
+.ai-marker-3 { width: 20px; height: 20px; top: 35%; left: 58%; animation-delay: 1.6s; }
+@keyframes markerPulse {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* Scan line animation */
+.scan-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  z-index: 3;
+  opacity: 0.7;
+  animation: scanSweep 3s ease-in-out infinite;
+  border-radius: 50%;
+  pointer-events: none;
+}
+@keyframes scanSweep {
+  0% { top: 10%; opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { top: 90%; opacity: 0; }
+}
+
+.challenge-prompt {
+  padding: 16px 20px 0;
+  text-align: center;
+}
+.challenge-prompt-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+.challenge-prompt-sub {
+  font-size: 12px;
+  color: var(--text-fine);
+}
+
+.challenge-options {
+  padding: 12px 20px 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.challenge-option {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(15,23,42,0.6);
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.challenge-option:hover {
+  border-color: rgba(45,212,191,0.4);
+  background: rgba(45,212,191,0.05);
+  color: #ffffff;
+}
+.challenge-option.selected {
+  border-color: var(--teal);
+  background: rgba(45,212,191,0.08);
+  color: #ffffff;
+}
+.challenge-option-letter {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--teal);
+  background: rgba(45,212,191,0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+
+.challenge-actions {
+  padding: 12px 20px 20px;
+  text-align: center;
+}
+.challenge-btn {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--teal-cta-from), var(--teal-cta-to));
+  border-radius: 12px;
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(20,184,166,0.25);
+  width: 100%;
+  justify-content: center;
+  border: none;
+}
+.challenge-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(20,184,166,0.35);
+}
+.challenge-micro {
+  font-size: 11px;
+  color: var(--text-fine);
+  margin-top: 8px;
+}
+
+/* Challenge result state (shown after click) */
+.challenge-result {
+  display: none;
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--border-default);
+}
+.challenge-result.visible { display: block; }
+.challenge-result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.challenge-result-badge.correct {
+  color: var(--success);
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.2);
+}
+.challenge-result-badge.incorrect {
+  color: var(--danger);
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.2);
+}
+.challenge-result-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.challenge-result-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.challenge-result-cta:hover { text-decoration: underline; }
+
 /* ── Mobile refinements for split hero ── */
 @media (max-width: 1023px) {
-  .hero-visual { max-width: 360px; }
+  .hero-visual { max-width: 400px; }
   .hero h1 { font-size: clamp(32px, 7vw, 48px); }
 }
 @media (max-width: 768px) {
@@ -2016,16 +2263,16 @@ section { padding: 100px 0; }
         <span class="eyebrow-dot"></span>
         AI-POWERED RETINAL DIAGNOSTIC TRAINING
       </div>
-      <h1 data-reveal aria-label="Stop Guessing. Start Diagnosing.">
-        <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Stop Guessing.</span></span>
-        <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">Start Diagnosing.</span></span>
+      <h1 data-reveal aria-label="Can You Diagnose This?">
+        <span class="hero-line" aria-hidden="true"><span class="hero-line-inner" id="heroLine1">Can You</span></span>
+        <span class="hero-line" aria-hidden="true"><span class="hero-line-inner delay-1 gradient-text gradient-text-glow" id="heroLine2">Diagnose This?</span></span>
       </h1>
-      <p class="hero-sub" data-reveal>Practice reading real fundus images, get instant AI feedback, and build the diagnostic confidence you need &mdash; before clinic and exams.</p>
+      <p class="hero-sub" data-reveal>Real fundus images. Real clinical cases. Get instant AI feedback on your diagnosis and build the pattern recognition you need &mdash; before exams.</p>
       <div class="hero-buttons" data-reveal>
-        <a href="#prototype" class="btn-hero-primary" id="heroCta">Try a Real Case &rarr;</a>
+        <a href="#prototype" class="btn-hero-primary" id="heroCta">Test Yourself on a Real Case &rarr;</a>
         <a href="#how-it-works" class="btn-hero-secondary">See How It Works</a>
       </div>
-      <div class="hero-microcopy" data-reveal>Free &middot; No signup &middot; Takes 30 seconds to start</div>
+      <div class="hero-microcopy" data-reveal>Free &middot; No signup &middot; Takes 30 seconds</div>
       <div class="hero-stats" data-reveal id="heroStats">
         <div class="hero-stat">
           <div class="hero-stat-value"><span data-count="50">0</span>+</div>
@@ -2044,31 +2291,37 @@ section { padding: 100px 0; }
     </div>
 
     <div class="hero-visual" data-reveal>
-      <div class="hero-mockup">
-        <div class="mockup-header">
-          <span class="mockup-case-id"><span aria-hidden="true">&#9679;</span> Case #DR-047</span>
-          <span class="mockup-difficulty intermediate">Intermediate</span>
+      <div class="hero-challenge" id="heroChallenge">
+        <div class="challenge-header">
+          <span class="challenge-case-id"><span aria-hidden="true">&#9679;</span> Case #DR-047</span>
+          <span class="challenge-timer"><span class="challenge-timer-dot"></span> Live Case</span>
         </div>
-        <div class="mockup-fundus-area">
-          <div class="mockup-fundus"></div>
+        <div class="challenge-fundus-area">
+          <div class="challenge-fundus">
+            <div class="scan-line"></div>
+            <div class="ai-marker ai-marker-1"></div>
+            <div class="ai-marker ai-marker-2"></div>
+            <div class="ai-marker ai-marker-3"></div>
+          </div>
         </div>
-        <div class="mockup-result">
-          <div class="mockup-diagnosis-row">
-            <div>
-              <div class="mockup-label">Your Diagnosis</div>
-              <div class="mockup-diagnosis">Diabetic Retinopathy</div>
-            </div>
-            <span class="mockup-correct" aria-label="Correct answer">&#10003; Correct</span>
-          </div>
-          <div class="mockup-confidence">
-            <div class="mockup-label">AI Confidence</div>
-            <div class="mockup-confidence-bar"><div class="mockup-confidence-fill"></div></div>
-            <span class="mockup-confidence-value">87%</span>
-          </div>
-          <div class="mockup-feedback">
-            <div class="mockup-feedback-label">AI Feedback</div>
-            <div class="mockup-feedback-text">Correctly identified microaneurysms and hard exudates in the macula. Consider noting venous beading for severity grading.</div>
-          </div>
+        <div class="challenge-prompt">
+          <div class="challenge-prompt-text">What do you see?</div>
+          <div class="challenge-prompt-sub">Select your diagnosis below</div>
+        </div>
+        <div class="challenge-options" id="challengeOptions">
+          <button class="challenge-option" data-answer="wrong"><span class="challenge-option-letter">A</span> Glaucoma</button>
+          <button class="challenge-option" data-answer="correct"><span class="challenge-option-letter">B</span> Diabetic Retinopathy</button>
+          <button class="challenge-option" data-answer="wrong"><span class="challenge-option-letter">C</span> Macular Degeneration</button>
+          <button class="challenge-option" data-answer="wrong"><span class="challenge-option-letter">D</span> Healthy Fundus</button>
+        </div>
+        <div class="challenge-actions" id="challengeActions">
+          <button class="challenge-btn" id="challengeCheckBtn">Check Diagnosis <span aria-hidden="true">&rarr;</span></button>
+          <div class="challenge-micro">Takes 30 seconds &middot; No signup needed</div>
+        </div>
+        <div class="challenge-result" id="challengeResult">
+          <div class="challenge-result-badge correct" id="challengeResultBadge">&#10003; Correct!</div>
+          <div class="challenge-result-text" id="challengeResultText">Microaneurysms and hard exudates in the macula indicate early Diabetic Retinopathy. AI confidence: 87%.</div>
+          <a href="#prototype" class="challenge-result-cta">Try more cases &rarr;</a>
         </div>
       </div>
     </div>
@@ -2150,9 +2403,9 @@ section { padding: 100px 0; }
 <!-- ═══════ MID-PAGE CTA ═══════ -->
 <div class="mid-cta" data-reveal>
   <div class="container" style="text-align:center;">
-    <p class="mid-cta-text">Ready to see if you can diagnose it?</p>
-    <a href="#prototype" class="btn-hero-primary">Try a Real Case &rarr;</a>
-    <div class="hero-microcopy" style="margin-top:12px;">Free &middot; No signup &middot; Takes 30 seconds</div>
+    <p class="mid-cta-text">Think you can spot what&rsquo;s wrong?</p>
+    <a href="#prototype" class="btn-hero-primary">Try Your First Diagnosis &rarr;</a>
+    <div class="hero-microcopy" style="margin-top:12px;">Free &middot; No signup &middot; Real clinical case</div>
   </div>
 </div>
 
@@ -2855,10 +3108,10 @@ section { padding: 100px 0; }
 <section class="final-cta" id="launch">
   <div class="final-cta-glow"></div>
   <div class="container">
-    <h2 class="section-heading" data-reveal>Your next exam won&rsquo;t wait.<br>Start practicing now.</h2>
-    <p class="final-cta-sub" data-reveal>50+ real clinical cases. Instant AI feedback. Track your progress. Built by students who understand the struggle.</p>
+    <h2 class="section-heading" data-reveal>Your next exam won&rsquo;t wait.<br>See if you can get it right.</h2>
+    <p class="final-cta-sub" data-reveal>50+ real clinical cases. Instant AI feedback. Track your improvement. Built by students who get it.</p>
     <div class="final-buttons" data-reveal>
-      <a href="#prototype" class="btn-final-primary">Try a Real Case Free &rarr;</a>
+      <a href="#prototype" class="btn-final-primary">Try Your First Diagnosis &rarr;</a>
       <a href="#features" class="btn-final-ghost">Learn More</a>
     </div>
     <div class="final-cta-trust" data-reveal>Built at University of Guelph &amp; University of Waterloo with clinical oversight from practicing optometrists.</div>
@@ -3123,6 +3376,45 @@ section { padding: 100px 0; }
     }
     if (!found) navLinks.forEach(function(l) { l.classList.remove('active'); });
   }
+  /* ─── Interactive Hero Challenge ─── */
+  var challengeOptions = document.querySelectorAll('.challenge-option');
+  var challengeCheckBtn = document.getElementById('challengeCheckBtn');
+  var challengeResult = document.getElementById('challengeResult');
+  var challengeResultBadge = document.getElementById('challengeResultBadge');
+  var challengeResultText = document.getElementById('challengeResultText');
+  var challengeActions = document.getElementById('challengeActions');
+  var selectedAnswer = null;
+
+  challengeOptions.forEach(function(opt) {
+    opt.addEventListener('click', function() {
+      challengeOptions.forEach(function(o) { o.classList.remove('selected'); });
+      opt.classList.add('selected');
+      selectedAnswer = opt.getAttribute('data-answer');
+    });
+  });
+
+  challengeCheckBtn.addEventListener('click', function() {
+    if (!selectedAnswer) return;
+    challengeActions.style.display = 'none';
+    document.getElementById('challengeOptions').style.pointerEvents = 'none';
+    if (selectedAnswer === 'correct') {
+      challengeResultBadge.className = 'challenge-result-badge correct';
+      challengeResultBadge.innerHTML = '&#10003; Correct!';
+      challengeResultText.textContent = 'Microaneurysms and hard exudates in the macula indicate Diabetic Retinopathy. AI confidence: 87%. Nice work!';
+    } else {
+      challengeResultBadge.className = 'challenge-result-badge incorrect';
+      challengeResultBadge.innerHTML = '&#10007; Not quite';
+      challengeResultText.textContent = 'The correct answer is Diabetic Retinopathy. Look for microaneurysms and hard exudates near the macula. Try more cases to sharpen your skills.';
+      challengeOptions.forEach(function(o) {
+        if (o.getAttribute('data-answer') === 'correct') {
+          o.style.borderColor = 'var(--success)';
+          o.style.background = 'rgba(52,211,153,0.08)';
+        }
+      });
+    }
+    challengeResult.classList.add('visible');
+  });
+
   window.addEventListener('scroll', updateActiveNav, { passive: true });
   updateActiveNav();
 })();

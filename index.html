@@ -1656,6 +1656,9 @@ section { padding: 100px 0; }
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
+@media (prefers-reduced-motion: reduce) {
+  .hero-mockup { animation: none; }
+}
 
 .mockup-header {
   display: flex;
@@ -1839,7 +1842,17 @@ section { padding: 100px 0; }
 }
 
 /* ── Section spacing rhythm ── */
-section { padding: 120px 0; }
+.problem-section,
+#features,
+#prototype,
+#how-it-works,
+#conditions,
+#condition-details,
+#case-library,
+#pricing,
+#disclaimer,
+#about,
+.why-section { padding: 120px 0; }
 .section-heading { font-size: clamp(28px, 4vw, 44px); line-height: 1.15; }
 
 /* ── Stronger final CTA ── */
@@ -1875,7 +1888,17 @@ section { padding: 120px 0; }
   .hero h1 { font-size: clamp(32px, 7vw, 48px); }
 }
 @media (max-width: 768px) {
-  section { padding: 80px 0; }
+  .problem-section,
+  #features,
+  #prototype,
+  #how-it-works,
+  #conditions,
+  #condition-details,
+  #case-library,
+  #pricing,
+  #disclaimer,
+  #about,
+  .why-section { padding: 80px 0; }
   .problem-grid { grid-template-columns: 1fr; gap: 16px; }
   .hero-mockup { box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
   .hero-visual { max-width: 320px; }
@@ -1983,7 +2006,7 @@ section { padding: 120px 0; }
     <div class="hero-visual" data-reveal>
       <div class="hero-mockup">
         <div class="mockup-header">
-          <span class="mockup-case-id">&#9679; Case #DR-047</span>
+          <span class="mockup-case-id"><span aria-hidden="true">&#9679;</span> Case #DR-047</span>
           <span class="mockup-difficulty intermediate">Intermediate</span>
         </div>
         <div class="mockup-fundus-area">
@@ -1995,7 +2018,7 @@ section { padding: 120px 0; }
               <div class="mockup-label">Your Diagnosis</div>
               <div class="mockup-diagnosis">Diabetic Retinopathy</div>
             </div>
-            <span class="mockup-correct">&#10003; Correct</span>
+            <span class="mockup-correct" aria-label="Correct answer">&#10003; Correct</span>
           </div>
           <div class="mockup-confidence">
             <div class="mockup-label">AI Confidence</div>
@@ -2065,22 +2088,22 @@ section { padding: 120px 0; }
     </div>
     <div class="problem-grid">
       <div class="problem-card" data-reveal>
-        <div class="problem-icon">&#128269;</div>
+        <div class="problem-icon" role="img" aria-label="Search">&#128269;</div>
         <h3>&ldquo;Am I reading this right?&rdquo;</h3>
         <p>You stare at a fundus photo and second-guess every finding. Without feedback, there&rsquo;s no way to know.</p>
       </div>
       <div class="problem-card" data-reveal>
-        <div class="problem-icon">&#128218;</div>
+        <div class="problem-icon" role="img" aria-label="Book">&#128218;</div>
         <h3>&ldquo;Textbooks aren&rsquo;t enough&rdquo;</h3>
         <p>Perfect textbook examples look nothing like the messy, ambiguous cases you&rsquo;ll see in clinic.</p>
       </div>
       <div class="problem-card" data-reveal>
-        <div class="problem-icon">&#9200;</div>
+        <div class="problem-icon" role="img" aria-label="Clock">&#9200;</div>
         <h3>&ldquo;My exam is coming up&rdquo;</h3>
         <p>NBEO and clinical exams test pattern recognition you can&rsquo;t memorize from slides. You need reps.</p>
       </div>
       <div class="problem-card" data-reveal>
-        <div class="problem-icon">&#127919;</div>
+        <div class="problem-icon" role="img" aria-label="Target">&#127919;</div>
         <h3>&ldquo;I don&rsquo;t know my weak spots&rdquo;</h3>
         <p>Without tracking, you keep making the same diagnostic mistakes without realizing it.</p>
       </div>
@@ -3042,7 +3065,8 @@ section { padding: 120px 0; }
     }
   });
   function updateActiveNav() {
-    var scrollPos = window.pageYOffset + 120;
+    var NAV_OFFSET = 120; /* accounts for fixed nav height + buffer */
+    var scrollPos = window.pageYOffset + NAV_OFFSET;
     var found = false;
     for (var i = navSections.length - 1; i >= 0; i--) {
       if (scrollPos >= navSections[i].el.offsetTop) {

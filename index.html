@@ -136,8 +136,23 @@ section { padding: 100px 0; }
   font-size: 14px;
   color: var(--text-muted);
   transition: color 0.2s;
+  padding: 4px 0;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--teal);
+  transition: width 0.25s ease;
 }
 .nav-links a:hover { color: #ffffff; }
+.nav-links a:hover::after { width: 100%; }
+.nav-links a.active { color: #ffffff; }
+.nav-links a.active::after { width: 100%; }
 
 .nav-actions { display: flex; align-items: center; gap: 12px; }
 
@@ -156,16 +171,33 @@ section { padding: 100px 0; }
   font-weight: 600;
   color: #ffffff;
   background: linear-gradient(135deg, var(--teal-cta-from), var(--teal-cta-to));
-  border-radius: 20px;
+  border-radius: 12px;
   padding: 8px 20px;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  transition: filter 0.2s;
+  transition: filter 0.2s, transform 0.2s;
 }
-.btn-cta:hover { filter: brightness(1.1); }
+.btn-cta:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .btn-cta .arrow { display: inline-block; transition: transform 0.2s; }
 .btn-cta:hover .arrow { transform: translateX(4px); }
+
+/* ───── NAV DESKTOP 3-COLUMN GRID ───── */
+@media (min-width: 769px) {
+  .nav-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+  }
+  .nav-links-wrapper {
+    display: contents;
+  }
+  .nav-links {
+    justify-self: center;
+  }
+  .nav-actions {
+    justify-self: end;
+  }
+}
 
 .hamburger {
   display: none;
@@ -1591,8 +1623,8 @@ section { padding: 100px 0; }
 @media (min-width: 1024px) {
   .hero-split {
     display: grid;
-    grid-template-columns: 55% 45%;
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
     align-items: center;
   }
   .hero-split .hero-content {
@@ -1636,7 +1668,7 @@ section { padding: 100px 0; }
 .hero-visual {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
   margin: 0 auto;
 }
 
@@ -1830,15 +1862,23 @@ section { padding: 100px 0; }
   line-height: 1.6;
 }
 
-/* ── Active Nav ── */
-.nav-links a.active { color: #ffffff; }
-
 /* ── Nav CTA Refinement ── */
 .btn-cta {
   box-shadow: 0 2px 12px rgba(20,184,166,0.2);
 }
 .btn-cta:hover {
   box-shadow: 0 4px 20px rgba(20,184,166,0.3);
+}
+
+/* ── Mid-page CTA ── */
+.mid-cta {
+  padding: 64px 0;
+}
+.mid-cta-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-body);
+  margin-bottom: 20px;
 }
 
 /* ── Section spacing rhythm ── */
@@ -2072,10 +2112,6 @@ section { padding: 100px 0; }
     <span class="social-proof-logo">University of Guelph</span>
     <span class="social-proof-sep"></span>
     <span class="social-proof-logo">University of Waterloo</span>
-    <span class="social-proof-sep"></span>
-    <span class="social-proof-logo">McMaster University</span>
-    <span class="social-proof-sep"></span>
-    <span class="social-proof-logo">Western University</span>
   </div>
 </div>
 
@@ -2110,6 +2146,15 @@ section { padding: 100px 0; }
     </div>
   </div>
 </section>
+
+<!-- ═══════ MID-PAGE CTA ═══════ -->
+<div class="mid-cta" data-reveal>
+  <div class="container" style="text-align:center;">
+    <p class="mid-cta-text">Ready to see if you can diagnose it?</p>
+    <a href="#prototype" class="btn-hero-primary">Try a Real Case &rarr;</a>
+    <div class="hero-microcopy" style="margin-top:12px;">Free &middot; No signup &middot; Takes 30 seconds</div>
+  </div>
+</div>
 
 <div class="section-divider"></div>
 
@@ -2638,6 +2683,47 @@ section { padding: 100px 0; }
   </div>
 </section>
 
+<!-- ═══════ WHY THIS MATTERS ═══════ -->
+<section class="why-section" id="why-matters">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <div class="section-label teal">THE DIFFERENCE</div>
+      <h2 class="section-heading">Why students are switching to RetinaScan</h2>
+    </div>
+    <div class="why-grid" data-reveal>
+      <div class="why-column traditional">
+        <div class="why-column-icon">&#128683;</div>
+        <div class="why-column-title">Traditional Learning</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Static textbook images</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Rote memorization</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> No real-time feedback</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> Same cases for everyone</div>
+        <div class="why-item"><span class="why-item-icon">&#10005;</span> No progress tracking</div>
+      </div>
+      <div class="why-column retinascan">
+        <div class="why-column-icon">&#9889;</div>
+        <div class="why-column-title">RetinaScan</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Real clinical fundus cases</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> AI-powered feedback</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Instant diagnostic scoring</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Adaptive case selection</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Confidence calibration</div>
+      </div>
+      <div class="why-column outcome">
+        <div class="why-column-icon">&#127919;</div>
+        <div class="why-column-title">Outcome</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Faster pattern recognition</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Better exam performance</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Real clinical intuition</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Know your weak spots</div>
+        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Measurable improvement</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
 <!-- ═══════ 9. TECHNOLOGY ═══════ -->
 <section id="pricing">
   <div class="container">
@@ -2764,47 +2850,6 @@ section { padding: 100px 0; }
     </div>
   </div>
 </section>
-
-<!-- ═══════ WHY THIS MATTERS ═══════ -->
-<section class="why-section" id="why-matters">
-  <div class="container">
-    <div class="section-header" data-reveal>
-      <div class="section-label teal">THE DIFFERENCE</div>
-      <h2 class="section-heading">Why students are switching to RetinaScan</h2>
-    </div>
-    <div class="why-grid" data-reveal>
-      <div class="why-column traditional">
-        <div class="why-column-icon">&#128683;</div>
-        <div class="why-column-title">Traditional Learning</div>
-        <div class="why-item"><span class="why-item-icon">&#10005;</span> Static textbook images</div>
-        <div class="why-item"><span class="why-item-icon">&#10005;</span> Rote memorization</div>
-        <div class="why-item"><span class="why-item-icon">&#10005;</span> No real-time feedback</div>
-        <div class="why-item"><span class="why-item-icon">&#10005;</span> Same cases for everyone</div>
-        <div class="why-item"><span class="why-item-icon">&#10005;</span> No progress tracking</div>
-      </div>
-      <div class="why-column retinascan">
-        <div class="why-column-icon">&#9889;</div>
-        <div class="why-column-title">RetinaScan</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Real clinical fundus cases</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> AI-powered feedback</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Instant diagnostic scoring</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Adaptive case selection</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--teal)">&#10003;</span> Confidence calibration</div>
-      </div>
-      <div class="why-column outcome">
-        <div class="why-column-icon">&#127919;</div>
-        <div class="why-column-title">Outcome</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Faster pattern recognition</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Better exam performance</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Real clinical intuition</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Know your weak spots</div>
-        <div class="why-item"><span class="why-item-icon" style="color:var(--blue)">&#10148;</span> Measurable improvement</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
 
 <!-- ═══════ 12. FINAL CTA ═══════ -->
 <section class="final-cta" id="launch">
